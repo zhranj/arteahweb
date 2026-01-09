@@ -15,6 +15,20 @@ navLinks.querySelectorAll('a').forEach(link => {
     });
 });
 
+// Hero carousel
+const heroSlides = document.querySelectorAll('.hero-slide');
+let currentSlide = 0;
+
+function nextSlide() {
+    heroSlides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % heroSlides.length;
+    heroSlides[currentSlide].classList.add('active');
+}
+
+if (heroSlides.length > 1) {
+    setInterval(nextSlide, 5000);
+}
+
 // Navbar background on scroll
 const navbar = document.querySelector('.navbar');
 window.addEventListener('scroll', () => {

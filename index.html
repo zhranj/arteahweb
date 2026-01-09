@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arteah | ARTEAH D.O.O.</title>
-    <meta name="description" content="Arteah - Professional services company based in Croatia">
+    <title>ARTEAH d.o.o.</title>
+    <meta name="description" content="ARTEAH d.o.o. - Projektiranje i IT usluge, Varaždin, Hrvatska">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,11 +13,12 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <a href="#" class="logo">ARTEAH</a>
+            <a href="#" class="logo">ARTEAH d.o.o.</a>
             <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#o-nama">O nama</a></li>
+                <li><a href="#projektiranje">Projektiranje</a></li>
+                <li><a href="#it">IT</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
             </ul>
             <button class="mobile-menu-btn" aria-label="Toggle menu">
                 <span></span>
@@ -28,38 +29,62 @@
     </nav>
 
     <header class="hero">
+        <div class="hero-carousel">
+            <div class="hero-slide active" style="background-image: url('img/placeholder_1.png')"></div>
+            <div class="hero-slide" style="background-image: url('img/placeholder_2.png')"></div>
+        </div>
+        <div class="hero-overlay"></div>
         <div class="container">
-            <h1>Welcome to <span class="highlight">Arteah</span></h1>
-            <p class="hero-subtitle">Crafting digital excellence with precision and passion</p>
-            <a href="#contact" class="btn btn-primary">Get in Touch</a>
+            <h1><span class="highlight">Art Meets Architecture</span></h1>
+            <p class="hero-subtitle">Spoj arhitekture i tehnologije za vaše projekte</p>
+            <a href="#kontakt" class="btn btn-primary">Kontaktirajte nas</a>
         </div>
     </header>
 
-    <section id="about" class="section about">
+    <section id="o-nama" class="section about">
         <div class="container">
-            <h2>About Us</h2>
+            <h2>O nama</h2>
             <div class="about-content">
-                <p>ARTEAH D.O.O. is a professional services company registered in Croatia. We are dedicated to delivering exceptional results for our clients through innovation, expertise, and unwavering commitment to quality.</p>
-                <p>Our team combines technical excellence with creative thinking to solve complex challenges and drive meaningful outcomes for businesses of all sizes.</p>
+                <p><strong>ARTEAH d.o.o.</strong> je tvrtka iz Varaždina specijalizirana za savjetovanje u arhitekturi i gradnji te organizaciju izvedbe projekata za zgrade - od prve ideje do usklađene, izvedbene dokumentacije. Radimo na projektima svih veličina, od preuređenja interijera do velikih stambenih i poslovnih kompleksa.</p>
+                <p>Direktorica, <strong>Tea Hranj, mag.ing.arch.</strong>, ima dugogodišnje iskustvo u arhitektonskom projektiranju i koordinaciji složenih građevinskih projekata.</p>
             </div>
         </div>
     </section>
 
-    <section id="services" class="section services">
+    <section id="projektiranje" class="section services">
         <div class="container">
-            <h2>Our Services</h2>
-            <div class="services-grid">
+            <h2>Projektiranje</h2>
+            <div class="services-grid services-grid-2">
                 <div class="service-card">
                     <div class="service-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                            <path d="M2 17l10 5 10-5"></path>
-                            <path d="M2 12l10 5 10-5"></path>
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
                         </svg>
                     </div>
-                    <h3>Consulting</h3>
-                    <p>Strategic guidance to help your business navigate challenges and seize opportunities.</p>
+                    <h3>Projektiranje i organizacija</h3>
+                    <p>Koordinacija svih faza projekta - od koncepta do izvedbene dokumentacije i dozvola, bilo da se radi o manjem preuređenju ili velikom građevinskom zahvatu.</p>
                 </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                            <path d="M12 12h.01"></path>
+                            <path d="M17 12h.01"></path>
+                            <path d="M7 12h.01"></path>
+                        </svg>
+                    </div>
+                    <h3>Savjetovanje</h3>
+                    <p>Stručna podrška pri donošenju odluka o materijalima, izvedivosti i optimizaciji troškova - s naglaskom na održivost i ponovnu upotrebu resursa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="it" class="section services">
+        <div class="container">
+            <h2>IT usluge</h2>
+            <div class="services-grid services-grid-2">
                 <div class="service-card">
                     <div class="service-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -67,54 +92,53 @@
                             <polyline points="8 6 2 12 8 18"></polyline>
                         </svg>
                     </div>
-                    <h3>Development</h3>
-                    <p>Custom software solutions built with modern technologies and best practices.</p>
+                    <h3>Razvoj aplikacija</h3>
+                    <p>Izrada desktop, web i mobilnih aplikacija prilagođenih vašim poslovnim potrebama.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
-                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
                         </svg>
                     </div>
-                    <h3>Support</h3>
-                    <p>Reliable ongoing support to ensure your systems run smoothly and efficiently.</p>
+                    <h3>IT konzalting</h3>
+                    <p>Savjetovanje i tehnička podrška za digitalizaciju vašeg poslovanja.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="section contact">
+    <section id="kontakt" class="section contact">
         <div class="container">
-            <h2>Contact Us</h2>
+            <h2>Kontakt</h2>
             <div class="contact-content">
                 <div class="contact-info">
+                    <div class="contact-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="7" r="4"></circle>
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        </svg>
+                        <div>
+                            <h4>Direktorica</h4>
+                            <p>Tea Hranj<br>tea@arteah.hr<br>+385 (0) 99 2062 395</p>
+                        </div>
+                    </div>
                     <div class="contact-item">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                             <circle cx="12" cy="10" r="3"></circle>
                         </svg>
                         <div>
-                            <h4>Location</h4>
-                            <p>Croatia</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
-                        </svg>
-                        <div>
-                            <h4>Email</h4>
-                            <p>info@arteah.com</p>
+                            <h4>Adresa</h4>
+                            <p>Zadarska ulica 1<br>Varaždin, Hrvatska</p>
                         </div>
                     </div>
                 </div>
                 <div class="contact-cta">
-                    <p>Ready to start your next project? We'd love to hear from you.</p>
-                    <a href="mailto:info@arteah.com" class="btn btn-primary">Send us an Email</a>
+                    <p>Spremni ste za novi projekt? Javite nam se!</p>
+                    <a href="mailto:tea@arteah.hr" class="btn btn-primary">Pošaljite email</a>
                 </div>
             </div>
         </div>
@@ -124,8 +148,7 @@
         <div class="container">
             <div class="footer-content">
                 <p class="footer-logo">ARTEAH</p>
-                <p class="footer-company">ARTEAH D.O.O.</p>
-                <p class="footer-copyright">&copy; 2026 Arteah. All rights reserved.</p>
+                <p class="footer-copyright">&copy; 2026 Arteah d.o.o. Sva prava pridržana.</p>
             </div>
         </div>
     </footer>
