@@ -335,6 +335,7 @@ a {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 10%;
 }
 
 .product-card h3 {
@@ -346,40 +347,41 @@ a {
     font-size: 0.95rem;
 }
 
-/* Eidolon Page Styles */
-.eidolon-hero {
+/* CurveKeeper Page Styles */
+.CurveKeeper-hero {
     padding: 140px 24px 80px;
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 }
 
-.eidolon-hero .container {
+.CurveKeeper-hero .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
     align-items: center;
 }
 
-.eidolon-hero h1 {
+.CurveKeeper-hero h1 {
     font-size: clamp(3rem, 6vw, 5rem);
     margin-bottom: 0.5rem;
     color: var(--color-primary);
+    white-space: nowrap;
 }
 
-.eidolon-tagline {
+.CurveKeeper-tagline {
     font-size: 1.5rem;
     color: var(--color-secondary);
     margin-bottom: 1.5rem;
     font-weight: 500;
 }
 
-.eidolon-description {
+.CurveKeeper-description {
     font-size: 1.125rem;
     color: var(--color-text-light);
     margin-bottom: 2rem;
     line-height: 1.7;
 }
 
-.eidolon-platforms {
+.CurveKeeper-platforms {
     display: flex;
     gap: 12px;
 }
@@ -394,20 +396,18 @@ a {
     font-weight: 500;
 }
 
-.eidolon-hero-image {
+.CurveKeeper-hero-image {
     display: flex;
     justify-content: center;
 }
 
-.eidolon-hero-image img {
+.CurveKeeper-hero-image img {
     max-width: 100%;
     max-height: 500px;
-    border-radius: 24px;
-    box-shadow: var(--shadow-lg);
 }
 
 /* Feature Blocks */
-.eidolon-features {
+.CurveKeeper-features {
     background: var(--color-bg);
 }
 
@@ -473,7 +473,7 @@ a {
 }
 
 /* Data Section */
-.eidolon-data {
+.CurveKeeper-data {
     background: var(--color-bg-alt);
 }
 
@@ -536,8 +536,26 @@ a {
     font-weight: bold;
 }
 
+.legal-notice {
+    margin-top: 3rem;
+    padding: 32px;
+    background: var(--color-bg);
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+}
+
+.legal-notice h3 {
+    margin-bottom: 1rem;
+}
+
+.legal-notice p {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
 /* Roadmap Section */
-.eidolon-roadmap {
+.CurveKeeper-roadmap {
     background: var(--color-bg);
 }
 
@@ -582,22 +600,22 @@ a {
     font-size: 0.9rem;
 }
 
-/* Eidolon Mobile Responsive */
+/* CurveKeeper Mobile Responsive */
 @media (max-width: 768px) {
-    .eidolon-hero .container {
+    .CurveKeeper-hero .container {
         grid-template-columns: 1fr;
         text-align: center;
     }
 
-    .eidolon-platforms {
+    .CurveKeeper-platforms {
         justify-content: center;
     }
 
-    .eidolon-hero-image {
+    .CurveKeeper-hero-image {
         order: -1;
     }
 
-    .eidolon-hero-image img {
+    .CurveKeeper-hero-image img {
         max-height: 300px;
     }
 
