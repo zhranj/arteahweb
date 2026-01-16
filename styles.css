@@ -329,6 +329,7 @@ a {
     border-radius: 12px;
     overflow: hidden;
     background: var(--color-bg-alt);
+    position: relative;
 }
 
 .product-image img {
@@ -338,6 +339,36 @@ a {
     object-position: center 10%;
 }
 
+.product-image-layered {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
+}
+
+.product-image-layered::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center 10%;
+    opacity: 0.15;
+}
+
+.product-image-layered img {
+    position: relative;
+    z-index: 1;
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+}
+
 .product-card h3 {
     margin-bottom: 0.5rem;
 }
@@ -345,6 +376,20 @@ a {
 .product-card p {
     color: var(--color-text-light);
     font-size: 0.95rem;
+}
+
+.coming-soon-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.75rem;
+    box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
 }
 
 /* CurveKeeper Page Styles */
