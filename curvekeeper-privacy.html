@@ -10,45 +10,70 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
+        .privacy-header {
+            padding: 120px 24px 60px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        .privacy-header .container {
+            max-width: 800px;
+        }
+        .privacy-header h1 {
+            margin-bottom: 0.5rem;
+        }
+        .privacy-header p {
+            color: var(--color-text-light);
+            font-size: 1.125rem;
+        }
         .privacy-content {
             max-width: 800px;
             margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-        .privacy-content h1 {
-            margin-bottom: 0.5rem;
+            padding: 3rem 24px 4rem;
         }
         .privacy-content .effective-date {
-            color: var(--text-secondary);
+            color: var(--color-text-light);
             margin-bottom: 2rem;
         }
         .privacy-content h2 {
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             margin-bottom: 1rem;
             font-size: 1.25rem;
+            text-align: left;
+        }
+        .privacy-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
         }
         .privacy-content p,
         .privacy-content li {
             line-height: 1.7;
             margin-bottom: 1rem;
+            color: var(--color-text);
         }
         .privacy-content ul {
             margin-left: 1.5rem;
             margin-bottom: 1rem;
         }
-        .privacy-content .contact-info {
-            background: var(--bg-secondary);
+        .privacy-content a {
+            color: var(--color-primary);
+            transition: var(--transition);
+        }
+        .privacy-content a:hover {
+            color: var(--color-primary-dark);
+            text-decoration: underline;
+        }
+        .privacy-contact-box {
+            background: var(--color-bg-alt);
             padding: 1.5rem;
-            border-radius: 8px;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
             margin-top: 2rem;
         }
-        .privacy-header {
-            background: var(--bg-secondary);
-            padding: 4rem 1rem 2rem;
-            margin-top: 60px;
+        .privacy-contact-box p {
+            margin-bottom: 0.5rem;
         }
-        .privacy-header .container {
-            max-width: 800px;
+        .privacy-contact-box p:last-child {
+            margin-bottom: 0;
         }
     </style>
 </head>
@@ -74,7 +99,7 @@
     <header class="privacy-header">
         <div class="container">
             <h1>Privacy Policy</h1>
-            <p>CurveKeeper Runes &amp; CurveKeeper MTG</p>
+            <p>CurveKeeper Runes & CurveKeeper MTG</p>
         </div>
     </header>
 
@@ -228,7 +253,7 @@
         <p>We may update this policy from time to time. We will post the updated policy at the URL above and update the effective date.</p>
 
         <h2>16) Contact</h2>
-        <div class="contact-info">
+        <div class="privacy-contact-box">
             <p><strong>Questions or requests:</strong> <a href="mailto:curvekeeper@arteah.hr">curvekeeper@arteah.hr</a></p>
             <p><strong>Developer / Data Controller:</strong> ARTEAH d.o.o.</p>
             <p><strong>Address:</strong> Zadarska ulica 1, Varaždin, Croatia</p>
