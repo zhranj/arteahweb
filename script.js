@@ -60,3 +60,95 @@ document.querySelectorAll('.section').forEach(section => {
     section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(section);
 });
+
+// Screenshot Lightbox
+(function() {
+    const screenshotContainers = document.querySelectorAll('.feature-screenshots');
+    if (screenshotContainers.length === 0) return;
+
+    // Create lightbox elements
+    const overlay = document.createElement('div');
+    overlay.className = 'lightbox-overlay';
+    overlay.innerHTML = `
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close">&times;</button>
+            <button class="lightbox-nav lightbox-prev" aria-label="Previous">&lsaquo;</button>
+            <img class="lightbox-image" src="" alt="Screenshot">
+            <button class="lightbox-nav lightbox-next" aria-label="Next">&rsaquo;</button>
+            <div class="lightbox-counter"></div>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+
+    const lightboxImage = overlay.querySelector('.lightbox-image');
+    const closeBtn = overlay.querySelector('.lightbox-close');
+    const prevBtn = overlay.querySelector('.lightbox-prev');
+    const nextBtn = overlay.querySelector('.lightbox-next');
+    const counter = overlay.querySelector('.lightbox-counter');
+
+    let currentImages = [];
+    let currentIndex = 0;
+
+    function openLightbox(images, index) {
+        currentImages = images;
+        currentIndex = index;
+        updateLightbox();
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function updateLightbox() {
+        lightboxImage.src = currentImages[currentIndex].src;
+        lightboxImage.alt = currentImages[currentIndex].alt || 'Screenshot';
+        counter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
+
+        // Show/hide nav buttons based on number of images
+        prevBtn.style.display = currentImages.length > 1 ? 'block' : 'none';
+        nextBtn.style.display = currentImages.length > 1 ? 'block' : 'none';
+    }
+
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % currentImages.length;
+        updateLightbox();
+    }
+
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+        updateLightbox();
+    }
+
+    // Add click handlers to all screenshot images
+    screenshotContainers.forEach(container => {
+        const images = container.querySelectorAll('img');
+        images.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                openLightbox(Array.from(images), index);
+            });
+        });
+    });
+
+    // Event listeners
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', prevImage);
+    nextBtn.addEventListener('click', nextImage);
+
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            closeLightbox();
+        }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!overlay.classList.contains('active')) return;
+
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') prevImage();
+        if (e.key === 'ArrowRight') nextImage();
+    });
+})();
