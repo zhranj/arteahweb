@@ -431,6 +431,8 @@ a {
 .store-badge {
     height: 40px;
     width: auto;
+    max-width: 150px;
+    display: block;
 }
 
 /* CurveKeeper Page Styles */
