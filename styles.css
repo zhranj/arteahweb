@@ -392,6 +392,47 @@ a {
     box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
 }
 
+.platform-badges {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.platform-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #64748b, #475569);
+    color: white;
+    box-shadow: 0 2px 4px rgba(100, 116, 139, 0.3);
+}
+
+.platform-badge-ios {
+    text-transform: none;
+}
+
+.platform-badge.available {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+}
+
+.platform-badge svg {
+    flex-shrink: 0;
+}
+
+.store-badge {
+    height: 40px;
+    width: auto;
+}
+
 /* CurveKeeper Page Styles */
 .CurveKeeper-hero {
     padding: 140px 24px 80px;
