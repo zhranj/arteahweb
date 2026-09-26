@@ -1,0 +1,7 @@
+/tasks/
+/research/
+/reports/
+/docs/_site/
+/.test-output/
+__pycache__/
+*.pyc

@@ -6,6 +6,20 @@ Official website for ARTEAH d.o.o. — architectural consulting and IT services 
 
 Simply open `index.html` in a browser to preview the site.
 
+### Browser checks
+
+These tools are for tests only. The website still needs no build step.
+
+```powershell
+python -m pip install -r requirements-test.txt
+python -m playwright install chromium
+python -m unittest discover -s tests -v
+```
+
+The checks cover professional service notices, their scope, mobile layout, and existing navigation.
+They save screenshots and Chromium V8 JavaScript coverage in `.test-output\`.
+See `AGENTS.md` for the workflow and `docs\GLOSSARY.md` for the components.
+
 ## Deployment to GitHub Pages
 
 ### 1. Push to GitHub
