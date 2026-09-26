@@ -384,6 +384,34 @@ class BusinessNoticeTests(unittest.TestCase):
                     original_metadata,
                 )
 
+    def test_product_descriptions_use_clear_sentences_without_em_dashes(self):
+        # Read rendered text so literal characters and HTML entities are both checked.
+        for filename, prefix in (("curvekeeper.html", "runes"), ("curvekeeperMTG.html", "mtg")):
+            for language in ("en", "hr"):
+                with self.subTest(page=filename, language=language):
+                    self.collect_coverage()
+                    self.page.goto((ROOT / filename).as_uri() + "?lang=" + language)
+                    expect(self.page.locator("html")).to_have_attribute("lang", language)
+                    expect(self.page.locator(".feature-block")).to_have_count(8)
+                    expect(self.page.locator("body")).not_to_contain_text("\u2014")
+                    self.assertNotIn("\u2014", self.page.content(), "Text attributes must also be free of em-dashes.")
+                    turn = self.page.locator(f'[data-i18n="{prefix}.turnTracking"]')
+                    completion = self.page.locator(f'[data-i18n="{prefix}.setCompletion"]')
+                    progress = self.page.locator(f'[data-i18n="{prefix}.setProgress"]')
+                    for phrase in (("turn number", "match results") if language == "en"
+                                   else ("redni broj poteza", "rezultate meča")):
+                        expect(turn).to_contain_text(phrase)
+                    for phrase in (("rarities", "foil", "copies") if language == "en"
+                                   else ("rijetkosti", "foil", "primjeraka")):
+                        expect(completion).to_contain_text(phrase)
+                    expect(progress).to_contain_text("up to three trackers" if language == "en" else "do tri praćenja")
+                    expect(progress).to_contain_text("automatically" if language == "en" else "automatski")
+                    expect(progress).to_contain_text("Cardmarket")
+                    if prefix == "mtg":
+                        expect(progress).to_contain_text("TCGPlayer")
+                    else:
+                        expect(progress).not_to_contain_text("TCGPlayer")
+
     def test_product_lightbox_localizes_controls_and_image_descriptions(self):
         for filename in ("curvekeeper.html", "curvekeeperMTG.html"):
             with self.subTest(page=filename):

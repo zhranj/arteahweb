@@ -268,16 +268,16 @@ Object.assign(window.siteTranslations, {
         en: "Turn your device into a full-featured game table companion. Track player scores for 2–5 players simultaneously with an immersive, rotatable layout that fills your entire screen."
     },
     'runes.turnTracking': {
-        hr: "Ugrađeno praćenje poteza pomaže u poštenoj igri — dodirom prijeđite na sljedećeg igrača, uz vizualni pokazatelj koji prikazuje tko je na potezu i redni broj poteza. Svaka promjena bodova bilježi se čim se dogodi, čime nastaje potpuna povijest tijeka igre pohranjena uz rezultate meča.",
-        en: "Built-in turn tracking keeps everyone honest — tap to advance through player turns with a visual indicator showing whose turn it is and which turn number you're on. Every score change is logged as it happens, creating a complete play-by-play history saved alongside your match results."
+        hr: "Dodirom prijeđite na sljedećeg igrača. Vizualni pokazatelj prikazuje tko je na potezu i redni broj poteza. Svaka promjena bodova bilježi se čim se dogodi. Potpuna povijest igre sprema se uz rezultate meča.",
+        en: "Tap to move to the next player. A visual indicator shows whose turn it is and the turn number. Every score change is recorded as it happens. The full game history is saved with your match results."
     },
     'runes.setCompletion': {
-        hr: "Prikupite cijeli set uz namjenski alat za kolekcionare koji žele dovršiti cijelu ekspanziju. Izradite prilagođena praćenja za bilo koji set uz detaljne postavke: odaberite određene rijetkosti, birajte između običnih i sjajnih (foil) izdanja te postavite koliko primjeraka svake karte trebate — idealno za sastavljanje punih kompleta za igru.",
-        en: "Chase the complete set with a dedicated tool for collectors working toward finishing an entire expansion. Create custom trackers for any set with fine-grained control: target specific rarities, choose between regular and foil printings, and set how many copies of each card you need — perfect for building full playsets."
+        hr: "Pratite napredak prema potpunom setu. Izradite praćenje za bilo koji set, odaberite rijetkosti, obična ili sjajna (foil) izdanja i broj primjeraka svake karte. Te postavke pomažu Vam sastaviti pune komplete za igru.",
+        en: "Track your progress toward a complete set. Create a tracker for any set, choose rarities, select regular or foil printings, and set the number of copies you need. Use these settings to build full playsets."
     },
     'runes.setProgress': {
-        hr: "Napredak Vaše zbirke računa se automatski iz karata koje već posjedujete, uz vizualni prikaz po rijetkosti koji točno pokazuje koliko ste napredovali. Prikvačite do tri praćenja na početni zaslon za brz pregled traka napretka i otvorite cijeli popis karata da biste vidjeli koje Vam još trebaju — uz filtriranje prema rijetkosti i vlasništvu te cijene s platforme Cardmarket u stvarnom vremenu koje Vam pomažu planirati kupnju.",
-        en: "Your collection progress is calculated automatically from cards you already own, with a visual breakdown by rarity showing exactly how far along you are. Pin up to three trackers to your Home screen for at-a-glance progress bars, and dive into the full card list to see which cards you still need — filterable by rarity, ownership status, and with real-time pricing from Cardmarket to help you plan your purchases."
+        hr: "Napredak Vaše zbirke ažurira se automatski prema kartama koje posjedujete, uz prikaz po rijetkosti. Prikvačite do tri praćenja na početni zaslon za brz pregled napretka. Otvorite cijeli popis i filtrirajte prema rijetkosti ili vlasništvu kako biste pronašli karte koje Vam nedostaju. Planirajte kupnju uz cijene s platforme Cardmarket u stvarnom vremenu.",
+        en: "Collection progress updates automatically from the cards you own, with a breakdown by rarity. Pin up to three trackers to your Home screen to see progress at a glance. Open the full card list and filter by rarity or ownership status to find missing cards. Use real-time prices from Cardmarket to plan your purchases."
     },
     'runes.data': {
         hr: "Kako se koriste podaci iz API-ja za Riftbound",
@@ -352,16 +352,16 @@ Object.assign(window.siteTranslations, {
         en: "Turn your device into a full-featured game table companion. Track life totals, energy, poison counters, and commander damage for 2–5 players simultaneously with an immersive, rotatable layout that fills your entire screen."
     },
     'mtg.turnTracking': {
-        hr: "Ugrađeno praćenje poteza pomaže u poštenoj igri — dodirom prijeđite na sljedećeg igrača, uz vizualni pokazatelj koji prikazuje tko je na potezu i redni broj poteza. Svaka promjena broja života bilježi se čim se dogodi, čime nastaje potpuna povijest tijeka igre pohranjena uz rezultate meča.",
-        en: "Built-in turn tracking keeps everyone honest — tap to advance through player turns with a visual indicator showing whose turn it is and which turn number you're on. Every life change is logged as it happens, creating a complete play-by-play history saved alongside your match results."
+        hr: "Dodirom prijeđite na sljedećeg igrača. Vizualni pokazatelj prikazuje tko je na potezu i redni broj poteza. Svaka promjena broja života bilježi se čim se dogodi. Potpuna povijest igre sprema se uz rezultate meča.",
+        en: "Tap to move to the next player. A visual indicator shows whose turn it is and the turn number. Every life change is recorded as it happens. The full game history is saved with your match results."
     },
     'mtg.setCompletion': {
-        hr: "Prikupite cijeli set uz namjenski alat za kolekcionare koji žele dovršiti cijelu ekspanziju. Izradite prilagođena praćenja za bilo koji set uz detaljne postavke: odaberite određene rijetkosti (od običnih do mitskih), birajte između običnih i sjajnih (foil) izdanja te postavite koliko primjeraka svake karte trebate — idealno za sastavljanje punih kompleta za igru.",
-        en: "Chase the complete set with a dedicated tool for collectors working toward finishing an entire expansion. Create custom trackers for any set with fine-grained control: target specific rarities (commons through mythics), choose between regular and foil printings, and set how many copies of each card you need — perfect for building full playsets."
+        hr: "Pratite napredak prema potpunom setu. Izradite praćenje za bilo koji set, odaberite rijetkosti (od običnih do mitskih), obična ili sjajna (foil) izdanja i broj primjeraka svake karte. Te postavke pomažu Vam sastaviti pune komplete za igru.",
+        en: "Track your progress toward a complete set. Create a tracker for any set, choose rarities (commons through mythics), select regular or foil printings, and set the number of copies you need. Use these settings to build full playsets."
     },
     'mtg.setProgress': {
-        hr: "Napredak Vaše zbirke računa se automatski iz karata koje već posjedujete, uz vizualni prikaz po rijetkosti koji točno pokazuje koliko ste napredovali. Prikvačite do tri praćenja na početni zaslon za brz pregled traka napretka i otvorite cijeli popis karata da biste vidjeli koje Vam još trebaju — uz filtriranje prema rijetkosti i vlasništvu te cijene s platformi TCGPlayer i Cardmarket u stvarnom vremenu koje Vam pomažu planirati kupnju.",
-        en: "Your collection progress is calculated automatically from cards you already own, with a visual breakdown by rarity showing exactly how far along you are. Pin up to three trackers to your Home screen for at-a-glance progress bars, and dive into the full card list to see which cards you still need — filterable by rarity, ownership status, and with real-time pricing from TCGPlayer and Cardmarket to help you plan your purchases."
+        hr: "Napredak Vaše zbirke ažurira se automatski prema kartama koje posjedujete, uz prikaz po rijetkosti. Prikvačite do tri praćenja na početni zaslon za brz pregled napretka. Otvorite cijeli popis i filtrirajte prema rijetkosti ili vlasništvu kako biste pronašli karte koje Vam nedostaju. Planirajte kupnju uz cijene s platformi TCGPlayer i Cardmarket u stvarnom vremenu.",
+        en: "Collection progress updates automatically from the cards you own, with a breakdown by rarity. Pin up to three trackers to your Home screen to see progress at a glance. Open the full card list and filter by rarity or ownership status to find missing cards. Use real-time prices from TCGPlayer and Cardmarket to plan your purchases."
     },
     'mtg.data': {
         hr: "Kako se koriste podaci o kartama za MTG",
