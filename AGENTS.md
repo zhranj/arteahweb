@@ -8,7 +8,9 @@ The site uses static HTML, CSS, and JavaScript. It has no production dependencie
 Keep the professional service notices in their architectural and IT sections.
 Do not describe CurveKeeper apps or the whole company as B2B-only.
 Do not publish negotiated rates, customer records, or internal quotation guidance.
-Use the existing design and Croatian text for the company page.
+Use the existing design. The company page defaults to Croatian.
+Product and privacy pages default to English. Keep their existing filenames.
+See `docs\GLOSSARY.md` for translation markers and language selection.
 
 ## Board and records
 
@@ -23,10 +25,12 @@ Install test dependencies with `python -m pip install -r requirements-test.txt`.
 Install the browser with `python -m playwright install chromium`.
 Run `python -m unittest discover -s tests -v`.
 
-The same command collects Chromium V8 precise coverage for `script.js`.
+The same command collects Chromium V8 precise coverage for every site JavaScript file.
 It writes the summary and service screenshots to the ignored `.test-output\` directory.
 The coverage percentage measures executed JavaScript source ranges, not HTML or CSS.
 Browser assertions and inspected screenshots cover the service text and layout.
+Language checks cover HR/EN defaults, switching, complete text markers, metadata,
+fixed links, privacy terms, and lightbox labels.
 
 ## Delivery
 

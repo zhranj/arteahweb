@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CurveKeeper MTG - Magic: The Gathering Companion | ARTEAH</title>
-    <meta name="description" content="CurveKeeper MTG - Mobile companion app for Magic: The Gathering players. Card scanning, collection management, deck building and game tracking.">
+    <title data-i18n="mtg.title">CurveKeeper MTG - Magic: The Gathering Companion | ARTEAH</title>
+    <meta name="description" data-i18n-content="mtg.description" content="CurveKeeper MTG - Mobile companion app for Magic: The Gathering players. Card scanning, collection management, deck building and game tracking.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,15 +13,16 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <a href="index.html" class="logo">ARTEAH d.o.o.</a>
+            <a href="index.html" class="logo" translate="no">ARTEAH d.o.o.</a>
             <ul class="nav-links">
-                <li><a href="index.html#o-nama">O nama</a></li>
-                <li><a href="index.html#projektiranje">Projektiranje</a></li>
-                <li><a href="index.html#it">IT</a></li>
-                <li><a href="index.html#products">Products</a></li>
-                <li><a href="index.html#kontakt">Kontakt</a></li>
+                <li><a href="index.html#o-nama" data-i18n="nav.about">About us</a></li>
+                <li><a href="index.html#projektiranje" data-i18n="nav.architecture">Architecture</a></li>
+                <li><a href="index.html#it" data-i18n="nav.it">IT</a></li>
+                <li><a href="index.html#products" data-i18n="nav.products">Products</a></li>
+                <li><a href="index.html#kontakt" data-i18n="nav.contact">Contact</a></li>
             </ul>
-            <button class="mobile-menu-btn" aria-label="Toggle menu">
+            <button class="language-toggle" type="button" aria-label="HR / EN - Switch to Croatian" hidden><span lang="hr">HR</span> / <span lang="en">EN</span></button>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" data-i18n-aria-label="menu.toggle">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -32,25 +33,25 @@
     <header class="CurveKeeper-hero">
         <div class="container">
             <div class="CurveKeeper-hero-content">
-                <h1>CurveKeeper MTG</h1>
-                <span class="coming-soon-badge" style="margin-bottom: 1rem;">Coming Soon to iOS App Store</span>
-                <p class="CurveKeeper-tagline">Your Magic: The Gathering Companion</p>
-                <p class="CurveKeeper-description">Point your phone at a card to identify it instantly, organize cards into collections and decks, track your collection's market value, and record game results to see your win rate over time.</p>
+                <h1 translate="no">CurveKeeper MTG</h1>
+                <span class="coming-soon-badge" style="margin-bottom: 1rem;" data-i18n="mtg.comingSoon">Coming Soon to iOS App Store</span>
+                <p class="CurveKeeper-tagline" data-i18n="mtg.tagline">Your Magic: The Gathering Companion</p>
+                <p class="CurveKeeper-description" data-i18n="product.introduction">Point your phone at a card to identify it instantly, organize cards into collections and decks, track your collection's market value, and record game results to see your win rate over time.</p>
                 <div class="CurveKeeper-platforms">
                     <a href="https://play.google.com/store/apps/details?id=com.curvekeeper.mtg" target="_blank" rel="noopener noreferrer">
-                        <img src="img/GetItOnGooglePlay_Badge_Web_color_English.png" alt="Get it on Google Play" class="store-badge">
+                        <img src="img/GetItOnGooglePlay_Badge_Web_color_English.png" alt="Get it on Google Play" class="store-badge" data-i18n-alt="common.googlePlay">
                     </a>
                 </div>
             </div>
             <div class="CurveKeeper-hero-image">
-                <img src="img/curvekeeperMTG/logo_green_alpha.png" alt="CurveKeeper MTG App Screenshot">
+                <img src="img/curvekeeperMTG/logo_green_alpha.png" alt="CurveKeeper MTG App Screenshot" data-i18n-alt="mtg.alt.app">
             </div>
         </div>
     </header>
 
     <section class="section CurveKeeper-features">
         <div class="container">
-            <h2>Features</h2>
+            <h2 data-i18n="product.features">Features</h2>
 
             <div class="feature-block">
                 <div class="feature-content">
@@ -60,14 +61,14 @@
                             <circle cx="12" cy="13" r="4"></circle>
                         </svg>
                     </div>
-                    <h3>Card Scanning</h3>
-                    <p>Point your camera at any Magic card. The app recognizes it in under 2 seconds and shows the card details with current market price. Add it to your collection with one tap.</p>
-                    <p>Use Fast Mode to rapidly swap cards in front of the camera - each card is automatically recognized and added to your collection without any taps.</p>
+                    <h3 data-i18n="product.scanning">Card Scanning</h3>
+                    <p data-i18n="mtg.scanning">Point your camera at any Magic card. The app recognizes it in under 2 seconds and shows the card details with current market price. Add it to your collection with one tap.</p>
+                    <p data-i18n="product.fastMode">Use Fast Mode to rapidly swap cards in front of the camera - each card is automatically recognized and added to your collection without any taps.</p>
                 </div>
                 <div class="feature-screenshots">
-                    <img src="img/curvekeeperMTG/scan_1.jpeg" alt="Camera view with card">
-                    <img src="img/curvekeeperMTG/scan_2.jpeg" alt="Recognition result">
-                    <img src="img/curvekeeperMTG/scan_3.jpeg" alt="Scan modes">
+                    <img src="img/curvekeeperMTG/scan_1.jpeg" alt="Camera view with card" data-i18n-alt="product.alt.camera">
+                    <img src="img/curvekeeperMTG/scan_2.jpeg" alt="Recognition result" data-i18n-alt="product.alt.recognition">
+                    <img src="img/curvekeeperMTG/scan_3.jpeg" alt="Scan modes" data-i18n-alt="product.alt.scanModes">
                 </div>
             </div>
 
@@ -78,13 +79,13 @@
                             <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
                         </svg>
                     </div>
-                    <h3>Collection Management</h3>
-                    <p>Organize your cards into collections - binders for your physical cards, wishlists for cards you want, or any custom grouping. See your total collection value at a glance. Track regular, foil, and special treatments separately.</p>
+                    <h3 data-i18n="product.collections">Collection Management</h3>
+                    <p data-i18n="mtg.collections">Organize your cards into collections - binders for your physical cards, wishlists for cards you want, or any custom grouping. See your total collection value at a glance. Track regular, foil, and special treatments separately.</p>
                 </div>
                 <div class="feature-screenshots">
-                    <img src="img/curvekeeperMTG/collection_1.jpeg" alt="Home screen with collection value">
-                    <img src="img/curvekeeperMTG/collection_2.jpeg" alt="Collection list">
-                    <img src="img/curvekeeperMTG/collection_3.jpeg" alt="Cards in a collection">
+                    <img src="img/curvekeeperMTG/collection_1.jpeg" alt="Home screen with collection value" data-i18n-alt="product.alt.collectionValue">
+                    <img src="img/curvekeeperMTG/collection_2.jpeg" alt="Collection list" data-i18n-alt="product.alt.collections">
+                    <img src="img/curvekeeperMTG/collection_3.jpeg" alt="Cards in a collection" data-i18n-alt="product.alt.collectionCards">
                 </div>
             </div>
 
@@ -98,15 +99,15 @@
                             <path d="M7 16h10"></path>
                         </svg>
                     </div>
-                    <h3>Deck Building</h3>
-                    <p>Build decks with automatic format validation. The app checks your deck against MTG rules for Commander, Standard, Modern, and other formats, telling you if something's wrong (too many copies, missing Commander, wrong deck size). Organize cards into sections like Commander, Main Deck, and Sideboard.</p>
-                    <p>Import and export your decks for seamless integration with other web or mobile applications.</p>
+                    <h3 data-i18n="product.decks">Deck Building</h3>
+                    <p data-i18n="mtg.decks">Build decks with automatic format validation. The app checks your deck against MTG rules for Commander, Standard, Modern, and other formats, telling you if something's wrong (too many copies, missing Commander, wrong deck size). Organize cards into sections like Commander, Main Deck, and Sideboard.</p>
+                    <p data-i18n="product.deckTransfer">Import and export your decks for seamless integration with other web or mobile applications.</p>
                 </div>
                 <div class="feature-screenshots">
-                    <img src="img/curvekeeperMTG/deck_1.jpeg" alt="Deck collections view">
-                    <img src="img/curvekeeperMTG/deck_2.jpeg" alt="Single deck view with sections">
-                    <img src="img/curvekeeperMTG/deck_3.jpeg" alt="Previewing a card in deck">
-                    <img src="img/curvekeeperMTG/deck_4.jpeg" alt="Adding a card">
+                    <img src="img/curvekeeperMTG/deck_1.jpeg" alt="Deck collections view" data-i18n-alt="product.alt.decks">
+                    <img src="img/curvekeeperMTG/deck_2.jpeg" alt="Single deck view with sections" data-i18n-alt="product.alt.deckSections">
+                    <img src="img/curvekeeperMTG/deck_3.jpeg" alt="Previewing a card in deck" data-i18n-alt="product.alt.deckCard">
+                    <img src="img/curvekeeperMTG/deck_4.jpeg" alt="Adding a card" data-i18n-alt="product.alt.addCard">
                 </div>
             </div>
 
@@ -119,13 +120,13 @@
                             <path d="M6 20v-4"></path>
                         </svg>
                     </div>
-                    <h3>Game Tracking</h3>
-                    <p>Record your games to track performance. Log the opponent, outcome, and optional notes. See your win rate per deck and overall stats on the home screen.</p>
+                    <h3 data-i18n="product.games">Game Tracking</h3>
+                    <p data-i18n="product.gamesDescription">Record your games to track performance. Log the opponent, outcome, and optional notes. See your win rate per deck and overall stats on the home screen.</p>
                 </div>
                 <div class="feature-screenshots">
-                    <img src="img/curvekeeperMTG/game_1.jpeg" alt="Game history in deck view">
-                    <img src="img/curvekeeperMTG/game_2.jpeg" alt="Game history tab">
-                    <img src="img/curvekeeperMTG/game_3.jpeg" alt="Adding a new game">
+                    <img src="img/curvekeeperMTG/game_1.jpeg" alt="Game history in deck view" data-i18n-alt="product.alt.deckGames">
+                    <img src="img/curvekeeperMTG/game_2.jpeg" alt="Game history tab" data-i18n-alt="product.alt.gameHistory">
+                    <img src="img/curvekeeperMTG/game_3.jpeg" alt="Adding a new game" data-i18n-alt="product.alt.addGame">
                 </div>
             </div>
 
@@ -136,15 +137,15 @@
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                         </svg>
                     </div>
-                    <h3>Live Game Tracking</h3>
-                    <p>Turn your device into a full-featured game table companion. Track life totals, energy, poison counters, and commander damage for 2–5 players simultaneously with an immersive, rotatable layout that fills your entire screen.</p>
-                    <p>Built-in turn tracking keeps everyone honest — tap to advance through player turns with a visual indicator showing whose turn it is and which turn number you're on. Every life change is logged as it happens, creating a complete play-by-play history saved alongside your match results.</p>
-                    <p>When the game ends, record the outcome and it's automatically linked to your deck's game history, building a detailed win/loss record over time. Multi-match sessions like best-of-three are fully supported, with all matches grouped under a single session.</p>
+                    <h3 data-i18n="product.liveGames">Live Game Tracking</h3>
+                    <p data-i18n="mtg.liveGames">Turn your device into a full-featured game table companion. Track life totals, energy, poison counters, and commander damage for 2–5 players simultaneously with an immersive, rotatable layout that fills your entire screen.</p>
+                    <p data-i18n="mtg.turnTracking">Built-in turn tracking keeps everyone honest — tap to advance through player turns with a visual indicator showing whose turn it is and which turn number you're on. Every life change is logged as it happens, creating a complete play-by-play history saved alongside your match results.</p>
+                    <p data-i18n="product.matchHistory">When the game ends, record the outcome and it's automatically linked to your deck's game history, building a detailed win/loss record over time. Multi-match sessions like best-of-three are fully supported, with all matches grouped under a single session.</p>
                 </div>
                 <div class="feature-screenshots">
-                    <img src="img/curvekeeperMTG/lifetrack_1.jpeg" alt="Life tracking interface">
-                    <img src="img/curvekeeperMTG/lifetrack_2.jpeg" alt="Commander damage tracking">
-                    <img src="img/curvekeeperMTG/lifetrack_3.jpeg" alt="Multiplayer pod view">
+                    <img src="img/curvekeeperMTG/lifetrack_1.jpeg" alt="Life tracking interface" data-i18n-alt="mtg.alt.life">
+                    <img src="img/curvekeeperMTG/lifetrack_2.jpeg" alt="Commander damage tracking" data-i18n-alt="mtg.alt.commanderDamage">
+                    <img src="img/curvekeeperMTG/lifetrack_3.jpeg" alt="Multiplayer pod view" data-i18n-alt="mtg.alt.multiplayer">
                 </div>
             </div>
 
@@ -156,12 +157,12 @@
                             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                         </svg>
                     </div>
-                    <h3>Price Tracking</h3>
-                    <p>See current market prices from Cardmarket (EUR) and optionally USD. Your collection value updates automatically when prices change. Tap any card to jump directly to its marketplace listing.</p>
+                    <h3 data-i18n="product.prices">Price Tracking</h3>
+                    <p data-i18n="product.pricesDescription">See current market prices from Cardmarket (EUR) and optionally USD. Your collection value updates automatically when prices change. Tap any card to jump directly to its marketplace listing.</p>
                 </div>
                 <div class="feature-screenshots">
-                    <img src="img/curvekeeperMTG/price_1.jpeg" alt="Card with price">
-                    <img src="img/curvekeeperMTG/price_2.jpeg" alt="Convenient marketplace link to the exact card">
+                    <img src="img/curvekeeperMTG/price_1.jpeg" alt="Card with price" data-i18n-alt="product.alt.price">
+                    <img src="img/curvekeeperMTG/price_2.jpeg" alt="Convenient marketplace link to the exact card" data-i18n-alt="product.alt.marketplace">
                 </div>
             </div>
 
@@ -173,14 +174,14 @@
                             <polyline points="22 4 12 14.01 9 11.01"></polyline>
                         </svg>
                     </div>
-                    <h3>Set Completion Tracker</h3>
-                    <p>Chase the complete set with a dedicated tool for collectors working toward finishing an entire expansion. Create custom trackers for any set with fine-grained control: target specific rarities (commons through mythics), choose between regular and foil printings, and set how many copies of each card you need — perfect for building full playsets.</p>
-                    <p>Your collection progress is calculated automatically from cards you already own, with a visual breakdown by rarity showing exactly how far along you are. Pin up to three trackers to your Home screen for at-a-glance progress bars, and dive into the full card list to see which cards you still need — filterable by rarity, ownership status, and with real-time pricing from TCGPlayer and Cardmarket to help you plan your purchases.</p>
+                    <h3 data-i18n="product.setCompletion">Set Completion Tracker</h3>
+                    <p data-i18n="mtg.setCompletion">Chase the complete set with a dedicated tool for collectors working toward finishing an entire expansion. Create custom trackers for any set with fine-grained control: target specific rarities (commons through mythics), choose between regular and foil printings, and set how many copies of each card you need — perfect for building full playsets.</p>
+                    <p data-i18n="mtg.setProgress">Your collection progress is calculated automatically from cards you already own, with a visual breakdown by rarity showing exactly how far along you are. Pin up to three trackers to your Home screen for at-a-glance progress bars, and dive into the full card list to see which cards you still need — filterable by rarity, ownership status, and with real-time pricing from TCGPlayer and Cardmarket to help you plan your purchases.</p>
                 </div>
                 <div class="feature-screenshots">
-                    <img src="img/curvekeeperMTG/setcompletion_1.jpeg" alt="Set completion tracker overview">
-                    <img src="img/curvekeeperMTG/setcompletion_2.jpeg" alt="Rarity breakdown progress">
-                    <img src="img/curvekeeperMTG/setcompletion_3.jpeg" alt="Missing cards list with prices">
+                    <img src="img/curvekeeperMTG/setcompletion_1.jpeg" alt="Set completion tracker overview" data-i18n-alt="product.alt.setCompletion">
+                    <img src="img/curvekeeperMTG/setcompletion_2.jpeg" alt="Rarity breakdown progress" data-i18n-alt="product.alt.rarityProgress">
+                    <img src="img/curvekeeperMTG/setcompletion_3.jpeg" alt="Missing cards list with prices" data-i18n-alt="product.alt.missingCards">
                 </div>
             </div>
 
@@ -198,13 +199,13 @@
                             <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
                         </svg>
                     </div>
-                    <h3>Works Offline</h3>
-                    <p>Everything works without internet. Your collection, decks, and game history are stored on your device. The app syncs card data and prices when you're online, but your personal data never leaves your phone.</p>
+                    <h3 data-i18n="product.offline">Works Offline</h3>
+                    <p data-i18n="product.offlineDescription">Everything works without internet. Your collection, decks, and game history are stored on your device. The app syncs card data and prices when you're online, but your personal data never leaves your phone.</p>
                 </div>
                 <div class="feature-screenshots">
-                    <img src="img/curvekeeperMTG/about_1.jpeg" alt="Screenshot of in-app feature list">
-                    <img src="img/curvekeeperMTG/about_2.jpeg" alt="Disclaimer notice">
-                    <img src="img/curvekeeperMTG/about_3.jpeg" alt="Backup creation screenshot">
+                    <img src="img/curvekeeperMTG/about_1.jpeg" alt="Screenshot of in-app feature list" data-i18n-alt="product.alt.features">
+                    <img src="img/curvekeeperMTG/about_2.jpeg" alt="Disclaimer notice" data-i18n-alt="product.alt.disclaimer">
+                    <img src="img/curvekeeperMTG/about_3.jpeg" alt="Backup creation screenshot" data-i18n-alt="product.alt.backup">
                 </div>
             </div>
         </div>
@@ -212,47 +213,47 @@
 
     <section class="section CurveKeeper-data">
         <div class="container">
-            <h2>How MTG Card Data Is Used</h2>
+            <h2 data-i18n="mtg.data">How MTG Card Data Is Used</h2>
             <div class="data-grid">
                 <div class="data-card">
-                    <h4>Data Source</h4>
-                    <p>Card database (names, images, stats, set information) sourced from the public Scryfall API.</p>
+                    <h4 data-i18n="product.dataSource">Data Source</h4>
+                    <p data-i18n="mtg.dataSource">Card database (names, images, stats, set information) sourced from the public Scryfall API.</p>
                 </div>
                 <div class="data-card">
-                    <h4>Sync Frequency</h4>
-                    <p>User has control over the card data freshness. The mobile app warns when newer data is available. It is recommended to sync regularly to keep your collection up to date.</p>
+                    <h4 data-i18n="product.sync">Sync Frequency</h4>
+                    <p data-i18n="mtg.sync">User has control over the card data freshness. The mobile app warns when newer data is available. It is recommended to sync regularly to keep your collection up to date.</p>
                 </div>
                 <div class="data-card">
-                    <h4>Storage</h4>
-                    <p><strong>Mobile:</strong> On-device database. No cloud storage of user data.</p>
+                    <h4 data-i18n="product.storage">Storage</h4>
+                    <p><strong data-i18n="product.mobileLabel">Mobile:</strong> <span data-i18n="product.mobileStorage">On-device database. No cloud storage of user data.</span></p>
                 </div>
                 <div class="data-card">
-                    <h4>Price Data</h4>
-                    <p>Card market prices fetched together with card data from Scryfall.</p>
+                    <h4 data-i18n="product.priceData">Price Data</h4>
+                    <p data-i18n="mtg.priceData">Card market prices fetched together with card data from Scryfall.</p>
                 </div>
             </div>
 
             <div class="privacy-notice">
-                <h3>Privacy</h3>
+                <h3 data-i18n="product.privacy">Privacy</h3>
                 <ul>
-                    <li>No user accounts required</li>
-                    <li>No personal data uploaded to any server</li>
-                    <li>All collection/deck/game data stays on your device</li>
-                    <li>Optional backup to iCloud or local file export</li>
+                    <li data-i18n="product.privacyAccounts">No user accounts required</li>
+                    <li data-i18n="product.privacyUploads">No personal data uploaded to any server</li>
+                    <li data-i18n="product.privacyDevice">All collection/deck/game data stays on your device</li>
+                    <li data-i18n="product.privacyBackup">Optional backup to iCloud or local file export</li>
                 </ul>
-                <p style="margin-top: 2rem; text-align: right;"><a href="curvekeeper-privacy.html" style="color: var(--color-primary); text-decoration: underline; font-weight: 500;">Read our full Privacy Policy &rarr;</a></p>
+                <p style="margin-top: 2rem; text-align: right;"><a href="curvekeeper-privacy.html" style="color: var(--color-primary); text-decoration: underline; font-weight: 500;" data-i18n="product.privacyLink">Read our full Privacy Policy &rarr;</a></p>
             </div>
 
             <div class="legal-notice">
-                <h3>Not Affiliated</h3>
-                <p>CurveKeeper MTG is an unofficial fan-made app and is not affiliated with, endorsed, sponsored, or specifically approved by Wizards of the Coast LLC. Magic: The Gathering and its respective properties are trademarks or registered trademarks of Wizards of the Coast LLC. Card data is sourced from publicly available APIs and databases.</p>
+                <h3 data-i18n="product.notAffiliated">Not Affiliated</h3>
+                <p data-i18n="mtg.legal">CurveKeeper MTG is an unofficial fan-made app and is not affiliated with, endorsed, sponsored, or specifically approved by Wizards of the Coast LLC. Magic: The Gathering and its respective properties are trademarks or registered trademarks of Wizards of the Coast LLC. Card data is sourced from publicly available APIs and databases.</p>
             </div>
         </div>
     </section>
 
     <section class="section CurveKeeper-roadmap">
         <div class="container">
-            <h2>What's Next</h2>
+            <h2 data-i18n="product.next">What's Next</h2>
             <div class="roadmap-grid">
                 <div class="roadmap-item">
                     <div class="roadmap-icon">
@@ -262,8 +263,8 @@
                             <line x1="12" y1="3" x2="12" y2="15"></line>
                         </svg>
                     </div>
-                    <h4>Cloud Sync</h4>
-                    <p>Optional cross-device sync for your collection</p>
+                    <h4 data-i18n="product.cloudSync">Cloud Sync</h4>
+                    <p data-i18n="product.cloudSyncDescription">Optional cross-device sync for your collection</p>
                 </div>
                 <div class="roadmap-item">
                     <div class="roadmap-icon">
@@ -274,8 +275,8 @@
                             <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                         </svg>
                     </div>
-                    <h4>Add Friends</h4>
-                    <p>Add friends and view their collections</p>
+                    <h4 data-i18n="product.friends">Add Friends</h4>
+                    <p data-i18n="product.friendsDescription">Add friends and view their collections</p>
                 </div>
                 <div class="roadmap-item">
                     <div class="roadmap-icon">
@@ -287,8 +288,8 @@
                             <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
                         </svg>
                     </div>
-                    <h4>Deck Sharing</h4>
-                    <p>Share decks via QR code or link</p>
+                    <h4 data-i18n="product.deckSharing">Deck Sharing</h4>
+                    <p data-i18n="product.deckSharingDescription">Share decks via QR code or link</p>
                 </div>
                 <div class="roadmap-item">
                     <div class="roadmap-icon">
@@ -298,8 +299,8 @@
                             <line x1="6" y1="20" x2="6" y2="14"></line>
                         </svg>
                     </div>
-                    <h4>Collection Stats</h4>
-                    <p>Charts showing value over time, set completion progress</p>
+                    <h4 data-i18n="product.collectionStats">Collection Stats</h4>
+                    <p data-i18n="product.collectionStatsDescription">Charts showing value over time, set completion progress</p>
                 </div>
             </div>
         </div>
@@ -308,12 +309,15 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <p class="footer-logo">ARTEAH</p>
-                <p class="footer-copyright">&copy; 2026 Arteah d.o.o. Sva prava pridržana.</p>
+                <p class="footer-logo" translate="no">ARTEAH</p>
+                <p class="footer-copyright" data-i18n="footer.copyright">&copy; 2026 Arteah d.o.o. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <script src="translations.js"></script>
+    <script src="product-translations.js"></script>
     <script src="script.js"></script>
+    <script src="language.js"></script>
 </body>
 </html>

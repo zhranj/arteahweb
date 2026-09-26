@@ -22,9 +22,11 @@ class BusinessNoticeTests(unittest.TestCase):
         OUTPUT.mkdir(exist_ok=True)
         cls.playwright = sync_playwright().start()
         cls.browser = cls.playwright.chromium.launch(headless=True)
-        cls.covered = bytearray(
-            len((ROOT / "script.js").read_bytes().decode("utf-8").encode("utf-16-le")) // 2
-        )
+        cls.coverage_by_url = {
+            source.as_uri(): bytearray(len(source.read_bytes().decode("utf-8").encode("utf-16-le")) // 2)
+            for source in ROOT.glob("*.js")
+        }
+        cls.covered = cls.coverage_by_url[(ROOT / "script.js").as_uri()]
 
     @classmethod
     def tearDownClass(cls):
@@ -34,6 +36,14 @@ class BusinessNoticeTests(unittest.TestCase):
             "covered_utf16_units": sum(cls.covered),
             "total_utf16_units": len(cls.covered),
             "percent": round(100 * sum(cls.covered) / len(cls.covered), 2),
+            "scripts": {
+                url.rsplit("/", 1)[-1]: {
+                    "covered_utf16_units": sum(covered),
+                    "total_utf16_units": len(covered),
+                    "percent": round(100 * sum(covered) / len(covered), 2),
+                }
+                for url, covered in cls.coverage_by_url.items()
+            },
         }
         (OUTPUT / "browser-coverage.json").write_text(
             json.dumps(summary, indent=2) + "\n", encoding="utf-8"
@@ -62,16 +72,17 @@ class BusinessNoticeTests(unittest.TestCase):
     def collect_coverage(self):
         result = self.cdp.send("Profiler.takePreciseCoverage")
         for script in result["result"]:
-            if script["url"] != (ROOT / "script.js").as_uri():
+            if script["url"] not in self.coverage_by_url:
                 continue
-            executed = bytearray(len(self.covered))
+            covered = self.coverage_by_url[script["url"]]
+            executed = bytearray(len(covered))
             ranges = [item for function in script["functions"] for item in function["ranges"]]
             # Nested zero-count ranges override their executed parent range.
             for item in sorted(ranges, key=lambda item: item["endOffset"] - item["startOffset"], reverse=True):
                 start, end = item["startOffset"], item["endOffset"]
                 executed[start:end] = bytes([int(item["count"] > 0)]) * (end - start)
             for index, value in enumerate(executed):
-                self.covered[index] |= value
+                covered[index] |= value
 
     def test_ac1_ac2_each_service_has_business_scope_and_precontract_quotation(self):
         # Each section must carry its own notice, not rely on a company-wide claim.
@@ -149,7 +160,7 @@ class BusinessNoticeTests(unittest.TestCase):
         self.assertEqual(links.evaluate_all("(nodes) => nodes.map(node => node.getAttribute('href'))"),
                          ["curvekeeper.html", "curvekeeperMTG.html"])
         self.page.set_viewport_size({"width": 375, "height": 1000})
-        button = self.page.get_by_role("button", name="Toggle menu")
+        button = self.page.get_by_role("button", name="Otvori ili zatvori izbornik")
         button.click()
         expect(self.page.locator(".nav-links")).to_have_class("nav-links active")
         self.page.locator(".nav-links").get_by_role("link", name="IT", exact=True).click()
@@ -221,6 +232,241 @@ class BusinessNoticeTests(unittest.TestCase):
                     self.page.screenshot(
                         path=str(OUTPUT / f"it-{slug}-{width}.png"), animations="disabled"
                     )
+
+    def test_language_defaults_and_round_trip_on_every_page(self):
+        pages = [
+            ("index.html", "hr", "Umjetnost susreće arhitekturu", "Art Meets Architecture"),
+            ("curvekeeper.html", "en", "Features", "Značajke"),
+            ("curvekeeperMTG.html", "en", "Features", "Značajke"),
+            ("curvekeeper-privacy.html", "en", "Privacy Policy", "Pravila privatnosti"),
+        ]
+        for filename, default, original_heading, translated_heading in pages:
+            with self.subTest(page=filename):
+                self.collect_coverage()
+                self.page.goto((ROOT / filename).as_uri())
+                expect(self.page.locator("html")).to_have_attribute("lang", default)
+                expect(self.page.get_by_role("heading", name=original_heading, exact=True)).to_have_count(1)
+                original = self.page.locator("body").inner_text()
+                links = self.page.locator("a").evaluate_all("(nodes) => nodes.map(n => n.getAttribute('href'))")
+                sources = self.page.locator("img").evaluate_all("(nodes) => nodes.map(n => n.getAttribute('src'))")
+                toggle = self.page.locator(".language-toggle")
+                expect(toggle).to_be_visible()
+                expect(toggle).to_have_text("HR / EN")
+                toggle.click()
+                other = "en" if default == "hr" else "hr"
+                expect(self.page.locator("html")).to_have_attribute("lang", other)
+                expect(self.page.get_by_role("heading", name=translated_heading, exact=True)).to_have_count(1)
+                self.assertNotEqual(self.page.locator("body").inner_text(), original)
+                self.assertEqual(self.page.locator("a").evaluate_all("(nodes) => nodes.map(n => n.getAttribute('href'))"), links)
+                self.assertEqual(self.page.locator("img").evaluate_all("(nodes) => nodes.map(n => n.getAttribute('src'))"), sources)
+                toggle.click()
+                expect(self.page.locator("html")).to_have_attribute("lang", default)
+                self.assertEqual(self.page.locator("body").inner_text(), original)
+
+    def test_language_selection_preserves_filename_hash_and_page_defaults(self):
+        self.page.goto((ROOT / "index.html").as_uri() + "#it")
+        self.page.locator(".language-toggle").click()
+        expect(self.page).to_have_url((ROOT / "index.html").as_uri() + "?lang=en#it")
+        self.page.reload()
+        expect(self.page.locator("html")).to_have_attribute("lang", "en")
+        expect(self.page.locator("#it h2")).to_have_text("IT services")
+        self.page.locator('#products a[href="curvekeeperMTG.html"]').click()
+        expect(self.page).to_have_url((ROOT / "curvekeeperMTG.html").as_uri())
+        expect(self.page.locator("html")).to_have_attribute("lang", "en")
+        self.page.locator(".language-toggle").click()
+        expect(self.page.locator("html")).to_have_attribute("lang", "hr")
+        self.page.locator(".logo").click()
+        expect(self.page).to_have_url((ROOT / "index.html").as_uri())
+        expect(self.page.locator("html")).to_have_attribute("lang", "hr")
+
+    def test_language_toggle_is_keyboard_accessible_and_fits_mobile(self):
+        for filename in ("index.html", "curvekeeper.html", "curvekeeperMTG.html", "curvekeeper-privacy.html"):
+            for width in (375, 768, 1440):
+                with self.subTest(page=filename, width=width):
+                    self.collect_coverage()
+                    self.page.set_viewport_size({"width": width, "height": 1000})
+                    self.page.goto((ROOT / filename).as_uri())
+                    for _ in range(2):
+                        toggle = self.page.locator(".language-toggle")
+                        expect(toggle).to_be_visible()
+                        expect(toggle).to_be_in_viewport(ratio=1)
+                        language = self.page.locator("html").get_attribute("lang")
+                        expected_name = "HR / EN - Prebaci na engleski" if language == "hr" else "HR / EN - Switch to Croatian"
+                        expect(toggle).to_have_accessible_name(expected_name)
+                        self.assertTrue(self.page.evaluate(
+                            "() => document.documentElement.scrollWidth <= window.innerWidth"
+                        ), f"{filename} overflows at {width}px.")
+                        self.page.screenshot(path=str(OUTPUT / f"{Path(filename).stem}-{language}-{width}.png"))
+                        toggle.focus()
+                        toggle.press("Enter")
+
+    def test_mobile_menu_updates_language_without_losing_navigation(self):
+        self.page.set_viewport_size({"width": 375, "height": 800})
+        self.page.locator(".mobile-menu-btn").click()
+        expect(self.page.locator(".nav-links")).to_be_visible()
+        self.page.locator(".language-toggle").click()
+        expect(self.page.locator(".nav-links a")).to_have_text(
+            ["About us", "Architecture", "IT", "Products", "Contact"]
+        )
+        self.page.locator(".nav-links").get_by_role("link", name="Contact", exact=True).click()
+        expect(self.page.locator(".nav-links")).to_be_hidden()
+        expect(self.page).to_have_url((ROOT / "index.html").as_uri() + "?lang=en#kontakt")
+
+    def test_unsupported_language_warns_and_keeps_the_page_default(self):
+        warnings = []
+        self.page.on("console", lambda message: warnings.append(message.text) if message.type == "warning" else None)
+        self.page.goto((ROOT / "index.html").as_uri() + "?lang=de")
+        expect(self.page.locator("html")).to_have_attribute("lang", "hr")
+        self.assertTrue(any('Unsupported language "de"' in warning for warning in warnings))
+        self.page.locator(".language-toggle").click()
+        expect(self.page).to_have_url((ROOT / "index.html").as_uri() + "?lang=en")
+
+    def test_english_company_copy_and_croatian_privacy_keep_their_meaning(self):
+        self.page.goto((ROOT / "index.html").as_uri() + "?lang=en")
+        expect(self.page.locator("#it")).to_contain_text("one free hour")
+        expect(self.page.locator("#it")).to_contain_text("more than ten years")
+        expect(self.page.locator("#it")).to_contain_text("business customers")
+        expect(self.page.locator("#projektiranje")).to_contain_text("before the contract")
+        expect(self.page.locator("#products")).not_to_contain_text("business customers")
+        expect(self.page.locator("#kontakt")).to_contain_text("kontakt@arteah.hr")
+        self.collect_coverage()
+        self.page.goto((ROOT / "curvekeeper-privacy.html").as_uri() + "?lang=hr")
+        expect(self.page.locator(".privacy-content h2")).to_have_count(16)
+        expect(self.page.locator(".effective-date")).to_contain_text("2026-01-01")
+        expect(self.page.locator(".privacy-content")).to_contain_text("Google AdMob")
+        expect(self.page.locator(".privacy-content")).to_contain_text("13")
+        expect(self.page.locator('a[href="mailto:curvekeeper@arteah.hr"]')).to_have_count(2)
+        expect(self.page.get_by_role("heading", name="16) Kontakt", exact=True)).to_have_count(1)
+        for clause in (
+            "Ne prodajemo Vaše osobne podatke.",
+            "Vi odlučujete hoćete li poslati poruku.",
+            "nije namijenjena djeci mlađoj od 13 godina",
+            "Nijedan način prijenosa ili pohrane nije 100% siguran.",
+            "Pogodnost je neobvezna.",
+        ):
+            expect(self.page.locator(".privacy-content")).to_contain_text(clause)
+
+    def test_all_language_bearing_text_and_attributes_are_registered(self):
+        for filename in ("index.html", "curvekeeper.html", "curvekeeperMTG.html", "curvekeeper-privacy.html"):
+            with self.subTest(page=filename):
+                self.collect_coverage()
+                self.page.goto((ROOT / filename).as_uri())
+                missing = self.page.evaluate(r"""() => {
+                    const missing = [];
+                    const walker = document.createTreeWalker(document.documentElement, NodeFilter.SHOW_TEXT);
+                    while (walker.nextNode()) {
+                        const node = walker.currentNode;
+                        if (!/\p{L}/u.test(node.textContent)) continue;
+                        const parent = node.parentElement;
+                        if (parent.closest('script, style, [data-i18n], [translate="no"], .language-toggle')) continue;
+                        missing.push(node.textContent.trim().slice(0, 100));
+                    }
+                    for (const [attribute, marker] of [
+                        ['alt', 'data-i18n-alt'], ['aria-label', 'data-i18n-aria-label']
+                    ]) {
+                        for (const element of document.querySelectorAll(`[${attribute}]`)) {
+                            if (element.matches('.language-toggle')) continue;
+                            if (element.getAttribute(attribute) && !element.hasAttribute(marker)
+                                && !element.closest('[translate="no"]')) {
+                                missing.push(`${attribute}: ${element.getAttribute(attribute)}`);
+                            }
+                        }
+                    }
+                    const description = document.querySelector('meta[name="description"]');
+                    if (!description?.hasAttribute('data-i18n-content')) missing.push('meta description');
+                    return missing;
+                }""")
+                self.assertEqual(missing, [], "Unregistered text could remain in the wrong language.")
+                original_metadata = self.page.locator('meta[name="description"]').get_attribute("content")
+                self.page.locator(".language-toggle").click()
+                self.assertNotEqual(
+                    self.page.locator('meta[name="description"]').get_attribute("content"),
+                    original_metadata,
+                )
+
+    def test_product_lightbox_localizes_controls_and_image_descriptions(self):
+        for filename in ("curvekeeper.html", "curvekeeperMTG.html"):
+            with self.subTest(page=filename):
+                self.collect_coverage()
+                self.page.goto((ROOT / filename).as_uri() + "?lang=hr")
+                expect(self.page.locator(".legal-notice")).to_contain_text("Bez službene povezanosti")
+                expect(self.page.locator(".privacy-notice")).to_contain_text("Osobni podaci ne šalju se ni na jedan poslužitelj")
+                source = "javnog API-ja tvrtke Riot Games" if filename == "curvekeeper.html" else "javnog API-ja platforme Scryfall"
+                expect(self.page.locator(".data-grid")).to_contain_text(source)
+                images = self.page.locator(".feature-screenshots").first.locator("img")
+                images.first.click()
+                expect(self.page.locator(".lightbox-overlay")).to_have_class("lightbox-overlay active")
+                expect(self.page.get_by_role("button", name="Zatvori", exact=True)).to_be_visible()
+                expect(images.first).to_have_attribute("alt", "Prikaz kamere s kartom")
+                expect(self.page.locator(".lightbox-image")).to_have_attribute("alt", "Prikaz kamere s kartom")
+                self.page.get_by_role("button", name="Sljedeća", exact=True).click()
+                expect(self.page.locator(".lightbox-counter")).to_have_text("2 / 3")
+                self.page.get_by_role("button", name="Prethodna", exact=True).click()
+                expect(self.page.locator(".lightbox-counter")).to_have_text("1 / 3")
+                self.page.keyboard.press("ArrowLeft")
+                expect(self.page.locator(".lightbox-counter")).to_have_text("3 / 3")
+                self.page.keyboard.press("ArrowRight")
+                expect(self.page.locator(".lightbox-counter")).to_have_text("1 / 3")
+                self.page.keyboard.press("Escape")
+                expect(self.page.locator(".lightbox-overlay")).not_to_have_class("lightbox-overlay active")
+                self.page.locator(".language-toggle").click()
+                images.first.click()
+                expect(self.page.get_by_role("button", name="Close", exact=True)).to_be_visible()
+                expect(self.page.locator(".lightbox-image")).to_have_attribute("alt", "Camera view with card")
+                self.page.get_by_role("button", name="Close", exact=True).click()
+
+    def test_bare_page_defaults_work_without_javascript(self):
+        context = self.browser.new_context(java_script_enabled=False)
+        try:
+            page = context.new_page()
+            for filename, language, heading in (
+                ("index.html", "hr", "Umjetnost susreće arhitekturu"),
+                ("curvekeeper.html", "en", "Features"),
+                ("curvekeeperMTG.html", "en", "Features"),
+                ("curvekeeper-privacy.html", "en", "Privacy Policy"),
+            ):
+                with self.subTest(page=filename):
+                    page.goto((ROOT / filename).as_uri())
+                    expect(page.locator("html")).to_have_attribute("lang", language)
+                    expect(page.get_by_role("heading", name=heading, exact=True)).to_be_visible()
+                    expect(page.locator(".language-toggle")).to_be_hidden()
+        finally:
+            context.close()
+
+    def test_default_html_matches_its_translations_without_javascript(self):
+        # This checks source consistency; literal assertions above check translation meaning.
+        context = self.browser.new_context(java_script_enabled=False)
+        try:
+            source_page = context.new_page()
+            for filename in ("index.html", "curvekeeper.html", "curvekeeperMTG.html", "curvekeeper-privacy.html"):
+                with self.subTest(page=filename):
+                    source_page.goto((ROOT / filename).as_uri())
+                    language = source_page.locator("html").get_attribute("lang")
+                    entries = source_page.evaluate("""() => {
+                        const entries = [];
+                        for (const [marker, attribute] of [
+                            ['data-i18n', null], ['data-i18n-alt', 'alt'],
+                            ['data-i18n-content', 'content'], ['data-i18n-aria-label', 'aria-label']
+                        ]) {
+                            for (const element of document.querySelectorAll(`[${marker}]`)) {
+                                entries.push({key: element.getAttribute(marker),
+                                    value: attribute ? element.getAttribute(attribute) : element.textContent});
+                            }
+                        }
+                        return entries;
+                    }""")
+                    self.collect_coverage()
+                    self.page.goto((ROOT / filename).as_uri())
+                    translations = self.page.evaluate("window.siteTranslations")
+                    for entry in entries:
+                        with self.subTest(key=entry["key"]):
+                            self.assertEqual(
+                                " ".join(entry["value"].split()),
+                                " ".join(translations[entry["key"]][language].split()),
+                                "Default HTML and runtime translation disagree.",
+                            )
+        finally:
+            context.close()
 
 
 if __name__ == "__main__":

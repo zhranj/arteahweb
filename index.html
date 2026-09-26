@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARTEAH d.o.o.</title>
-    <meta name="description" content="ARTEAH d.o.o. - Projektiranje i IT usluge, Varaždin, Hrvatska">
+    <title translate="no">ARTEAH d.o.o.</title>
+    <meta name="description" data-i18n-content="home.description" content="ARTEAH d.o.o. - Projektiranje i IT usluge, Varaždin, Hrvatska">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,15 +13,16 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <a href="#" class="logo">ARTEAH d.o.o.</a>
+            <a href="#" class="logo" translate="no">ARTEAH d.o.o.</a>
             <ul class="nav-links">
-                <li><a href="#o-nama">O nama</a></li>
-                <li><a href="#projektiranje">Projektiranje</a></li>
-                <li><a href="#it">IT</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#kontakt">Kontakt</a></li>
+                <li><a href="#o-nama" data-i18n="nav.about">O nama</a></li>
+                <li><a href="#projektiranje" data-i18n="nav.architecture">Projektiranje</a></li>
+                <li><a href="#it" data-i18n="nav.it">IT</a></li>
+                <li><a href="#products" data-i18n="nav.products">Proizvodi</a></li>
+                <li><a href="#kontakt" data-i18n="nav.contact">Kontakt</a></li>
             </ul>
-            <button class="mobile-menu-btn" aria-label="Toggle menu">
+            <button class="language-toggle" type="button" aria-label="HR / EN - Prebaci na engleski" hidden><span lang="hr">HR</span> / <span lang="en">EN</span></button>
+            <button class="mobile-menu-btn" data-i18n-aria-label="menu.toggle" aria-label="Otvori ili zatvori izbornik">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -36,28 +37,28 @@
         </div>
         <div class="hero-overlay"></div>
         <div class="container">
-            <h1><span class="highlight">Art Meets Architecture</span></h1>
-            <p class="hero-subtitle">Spoj arhitekture i tehnologije za vaše projekte</p>
-            <a href="#kontakt" class="btn btn-primary">Kontaktirajte nas</a>
+            <h1><span class="highlight" data-i18n="home.hero">Umjetnost susreće arhitekturu</span></h1>
+            <p class="hero-subtitle" data-i18n="home.subtitle">Spoj arhitekture i tehnologije za Vaše projekte</p>
+            <a href="#kontakt" class="btn btn-primary" data-i18n="home.contactUs">Kontaktirajte nas</a>
         </div>
     </header>
 
     <section id="o-nama" class="section about">
         <div class="container">
-            <h2>O nama</h2>
+            <h2 data-i18n="nav.about">O nama</h2>
             <div class="about-content">
-                <p><strong>ARTEAH d.o.o.</strong> je tvrtka iz Varaždina specijalizirana za savjetovanje u arhitekturi i gradnji te organizaciju izvedbe projekata za zgrade - od prve ideje do usklađene, izvedbene dokumentacije. Radimo na projektima svih veličina, od preuređenja interijera do velikih stambenih i poslovnih kompleksa.</p>
-                <p>Direktorica, <strong>Tea Hranj, mag.ing.arch.</strong>, ima dugogodišnje iskustvo u arhitektonskom projektiranju i koordinaciji složenih građevinskih projekata.</p>
+                <p><strong translate="no">ARTEAH d.o.o.</strong><span data-i18n="home.about"> je tvrtka iz Varaždina specijalizirana za savjetovanje u arhitekturi i gradnji te organizaciju izvedbe projekata za zgrade - od prve ideje do usklađene, izvedbene dokumentacije. Radimo na projektima svih veličina, od preuređenja interijera do velikih stambenih i poslovnih kompleksa.</span></p>
+                <p><span data-i18n="home.directorPrefix">Direktorica, </span><strong translate="no">Tea Hranj, mag.ing.arch.</strong><span data-i18n="home.directorExperience">, ima dugogodišnje iskustvo u arhitektonskom projektiranju i koordinaciji složenih građevinskih projekata.</span></p>
             </div>
         </div>
     </section>
 
     <section id="projektiranje" class="section services">
         <div class="container">
-            <h2>Projektiranje</h2>
+            <h2 data-i18n="nav.architecture">Projektiranje</h2>
             <div class="about-content">
-                <p>Usluge projektiranja, organizacije i savjetovanja pružamo isključivo poslovnim korisnicima za potrebe njihove djelatnosti.</p>
-                <p>Cijenu određujemo prema opsegu projekta. Opseg usluge, cijenu i uvjete plaćanja utvrđujemo pisanom ponudom prije sklapanja ugovora.</p>
+                <p data-i18n="home.architectureScope">Usluge projektiranja, organizacije i savjetovanja pružamo isključivo poslovnim korisnicima za potrebe njihove djelatnosti.</p>
+                <p data-i18n="home.quotation">Cijenu određujemo prema opsegu projekta. Opseg usluge, cijenu i uvjete plaćanja utvrđujemo pisanom ponudom prije sklapanja ugovora.</p>
             </div>
             <div class="services-grid services-grid-2">
                 <div class="service-card">
@@ -67,8 +68,8 @@
                             <polyline points="9 22 9 12 15 12 15 22"></polyline>
                         </svg>
                     </div>
-                    <h3>Projektiranje i organizacija</h3>
-                    <p>Koordinacija svih faza projekta - od koncepta do izvedbene dokumentacije i dozvola, bilo da se radi o manjem preuređenju ili velikom građevinskom zahvatu.</p>
+                    <h3 data-i18n="home.designTitle">Projektiranje i organizacija</h3>
+                    <p data-i18n="home.design">Koordinacija svih faza projekta - od koncepta do izvedbene dokumentacije i dozvola, bilo da se radi o manjem preuređenju ili velikom građevinskom zahvatu.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
@@ -79,8 +80,8 @@
                             <path d="M7 12h.01"></path>
                         </svg>
                     </div>
-                    <h3>Savjetovanje</h3>
-                    <p>Stručna podrška pri donošenju odluka o materijalima, izvedivosti i optimizaciji troškova - s naglaskom na održivost i ponovnu upotrebu resursa.</p>
+                    <h3 data-i18n="home.adviceTitle">Savjetovanje</h3>
+                    <p data-i18n="home.advice">Stručna podrška pri donošenju odluka o materijalima, izvedivosti i optimizaciji troškova - s naglaskom na održivost i ponovnu upotrebu resursa.</p>
                 </div>
             </div>
         </div>
@@ -88,10 +89,10 @@
 
     <section id="it" class="section services">
         <div class="container">
-            <h2>IT usluge</h2>
+            <h2 data-i18n="home.itTitle">IT usluge</h2>
             <div class="about-content">
-                <p>Razvoj aplikacija po narudžbi, IT savjetovanje i tehničku podršku pružamo isključivo poslovnim korisnicima za potrebe njihove djelatnosti.</p>
-                <p>Cijenu određujemo prema opsegu projekta. Opseg usluge, cijenu i uvjete plaćanja utvrđujemo pisanom ponudom prije sklapanja ugovora.</p>
+                <p data-i18n="home.itScope">Razvoj aplikacija po narudžbi, IT savjetovanje i tehničku podršku pružamo isključivo poslovnim korisnicima za potrebe njihove djelatnosti.</p>
+                <p data-i18n="home.quotation">Cijenu određujemo prema opsegu projekta. Opseg usluge, cijenu i uvjete plaćanja utvrđujemo pisanom ponudom prije sklapanja ugovora.</p>
             </div>
             <div class="services-grid services-grid-2">
                 <div class="service-card">
@@ -101,8 +102,8 @@
                             <polyline points="8 6 2 12 8 18"></polyline>
                         </svg>
                     </div>
-                    <h3>Razvoj aplikacija</h3>
-                    <p>Razvijamo web, mobilne i desktop aplikacije prilagođene Vašem načinu rada. Automatizirajte zadatke, povežite podatke i olakšajte rad svojem timu i kupcima.</p>
+                    <h3 data-i18n="home.developmentTitle">Razvoj aplikacija</h3>
+                    <p data-i18n="home.development">Razvijamo web, mobilne i desktop aplikacije prilagođene Vašem načinu rada. Automatizirajte zadatke, povežite podatke i olakšajte rad svojem timu i kupcima.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
@@ -112,8 +113,8 @@
                             <line x1="12" y1="17" x2="12" y2="21"></line>
                         </svg>
                     </div>
-                    <h3>IT konzalting</h3>
-                    <p>Kontaktirajte nas za jedan sat besplatnog uvodnog savjetovanja za tvrtke. Uz više od deset godina iskustva u području umjetne inteligencije, pomažemo Vam otkriti kako automatizacija i AI mogu unaprijediti Vaše poslovanje.</p>
+                    <h3 data-i18n="home.consultingTitle">IT konzalting</h3>
+                    <p data-i18n="home.consulting">Kontaktirajte nas za jedan sat besplatnog uvodnog savjetovanja za tvrtke. Uz više od deset godina iskustva u području umjetne inteligencije, pomažemo Vam otkriti kako automatizacija i AI mogu unaprijediti Vaše poslovanje.</p>
                 </div>
             </div>
         </div>
@@ -121,24 +122,24 @@
 
     <section id="products" class="section products">
         <div class="container">
-            <h2>Products</h2>
+            <h2 data-i18n="nav.products">Proizvodi</h2>
             <div class="products-grid">
                 <a href="curvekeeper.html" class="product-card">
                     <div class="product-image product-image-layered" style="--bg-image: url('img/curvekeeper/game_1.jpeg');">
-                        <img src="img/curvekeeper/logo_purple_alpha.png" alt="CurveKeeper Logo">
+                        <img src="img/curvekeeper/logo_purple_alpha.png" data-i18n-alt="home.runesLogo" alt="Logotip CurveKeeper">
                     </div>
-                    <h3>CurveKeeper Runes</h3>
-                    <p>The unofficial Riftbound card scanner, deck builder and game tracker app.</p>
-                    <span class="coming-soon-badge">Coming Soon</span>
+                    <h3 translate="no">CurveKeeper Runes</h3>
+                    <p data-i18n="home.runes">Neslužbena aplikacija za skeniranje Riftbound karata, izradu špilova i praćenje igara.</p>
+                    <span class="coming-soon-badge" data-i18n="common.comingSoon">Uskoro</span>
                 </a>
                 <a href="curvekeeperMTG.html" class="product-card">
                     <div class="product-image product-image-layered" style="--bg-image: url('img/curvekeeperMTG/price_1.jpeg');">
-                        <img src="img/curvekeeperMTG/logo_green_alpha.png" alt="CurveKeeper MTG Logo">
+                        <img src="img/curvekeeperMTG/logo_green_alpha.png" data-i18n-alt="home.mtgLogo" alt="Logotip CurveKeeper MTG">
                     </div>
-                    <h3>CurveKeeper MTG</h3>
-                    <p>Magic: The Gathering card scanner, deck builder and game tracker app.</p>
+                    <h3 translate="no">CurveKeeper MTG</h3>
+                    <p data-i18n="home.mtg">Aplikacija za skeniranje Magic: The Gathering karata, izradu špilova i praćenje igara.</p>
                     <div class="platform-badges">
-                        <img src="img/GetItOnGooglePlay_Badge_Web_color_English.png" alt="Get it on Google Play" class="store-badge">
+                        <img src="img/GetItOnGooglePlay_Badge_Web_color_English.png" data-i18n-alt="common.googlePlay" alt="Preuzmite na Google Playu" class="store-badge">
                     </div>
                 </a>
             </div>
@@ -147,7 +148,7 @@
 
     <section id="kontakt" class="section contact">
         <div class="container">
-            <h2>Kontakt</h2>
+            <h2 data-i18n="nav.contact">Kontakt</h2>
             <div class="contact-content">
                 <div class="contact-info">
                     <div class="contact-item">
@@ -156,8 +157,8 @@
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         </svg>
                         <div>
-                            <h4>Direktorica</h4>
-                            <p>Tea Hranj<br>kontakt@arteah.hr<br>+385 (0) 99 2062 395</p>
+                            <h4 data-i18n="home.director">Direktorica</h4>
+                            <p translate="no">Tea Hranj<br>kontakt@arteah.hr<br>+385 (0) 99 2062 395</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -166,14 +167,14 @@
                             <circle cx="12" cy="10" r="3"></circle>
                         </svg>
                         <div>
-                            <h4>Adresa</h4>
-                            <p>Zadarska ulica 1<br>Varaždin, Hrvatska</p>
+                            <h4 data-i18n="home.address">Adresa</h4>
+                            <p><span translate="no">Zadarska ulica 1</span><br><span data-i18n="home.location">Varaždin, Hrvatska</span></p>
                         </div>
                     </div>
                 </div>
                 <div class="contact-cta">
-                    <p>Spremni ste za novi projekt? Javite nam se!</p>
-                    <a href="mailto:kontakt@arteah.hr" class="btn btn-primary">Pošaljite email</a>
+                    <p data-i18n="home.ready">Spremni ste za novi projekt? Javite nam se!</p>
+                    <a href="mailto:kontakt@arteah.hr" class="btn btn-primary" data-i18n="home.email">Pošaljite email</a>
                 </div>
             </div>
         </div>
@@ -182,12 +183,14 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <p class="footer-logo">ARTEAH</p>
-                <p class="footer-copyright">&copy; 2026 Arteah d.o.o. Sva prava pridržana.</p>
+                <p class="footer-logo" translate="no">ARTEAH</p>
+                <p class="footer-copyright" data-i18n="footer.copyright">&copy; 2026 Arteah d.o.o. Sva prava pridržana.</p>
             </div>
         </div>
     </footer>
 
+    <script src="translations.js"></script>
     <script src="script.js"></script>
+    <script src="language.js"></script>
 </body>
 </html>

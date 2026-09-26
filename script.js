@@ -71,11 +71,11 @@ document.querySelectorAll('.section').forEach(section => {
     overlay.className = 'lightbox-overlay';
     overlay.innerHTML = `
         <div class="lightbox-content">
-            <button class="lightbox-close" aria-label="Close">&times;</button>
-            <button class="lightbox-nav lightbox-prev" aria-label="Previous">&lsaquo;</button>
-            <img class="lightbox-image" src="" alt="Screenshot">
-            <button class="lightbox-nav lightbox-next" aria-label="Next">&rsaquo;</button>
-            <div class="lightbox-counter"></div>
+            <button class="lightbox-close" data-i18n-aria-label="lightbox.close" aria-label="Close">&times;</button>
+            <button class="lightbox-nav lightbox-prev" data-i18n-aria-label="lightbox.previous" aria-label="Previous">&lsaquo;</button>
+            <img class="lightbox-image" src="" data-i18n-alt="lightbox.screenshot" alt="Screenshot">
+            <button class="lightbox-nav lightbox-next" data-i18n-aria-label="lightbox.next" aria-label="Next">&rsaquo;</button>
+            <div class="lightbox-counter" translate="no"></div>
         </div>
     `;
     document.body.appendChild(overlay);
@@ -85,6 +85,9 @@ document.querySelectorAll('.section').forEach(section => {
     const prevBtn = overlay.querySelector('.lightbox-prev');
     const nextBtn = overlay.querySelector('.lightbox-next');
     const counter = overlay.querySelector('.lightbox-counter');
+    document.addEventListener('languagechange', () => {
+        if (overlay.classList.contains('active')) updateLightbox();
+    });
 
     let currentImages = [];
     let currentIndex = 0;
@@ -104,7 +107,8 @@ document.querySelectorAll('.section').forEach(section => {
 
     function updateLightbox() {
         lightboxImage.src = currentImages[currentIndex].src;
-        lightboxImage.alt = currentImages[currentIndex].alt || 'Screenshot';
+        lightboxImage.alt = currentImages[currentIndex].alt ||
+            window.siteTranslations['lightbox.screenshot'][document.documentElement.lang];
         counter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
 
         // Show/hide nav buttons based on number of images

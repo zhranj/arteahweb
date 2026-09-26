@@ -6,6 +6,13 @@ Official website for ARTEAH d.o.o. — architectural consulting and IT services 
 
 Simply open `index.html` in a browser to preview the site.
 
+The top-menu **HR / EN** button changes the current page language.
+`index.html` defaults to Croatian. `curvekeeper.html`, `curvekeeperMTG.html`,
+and `curvekeeper-privacy.html` default to English.
+An explicit `?lang=hr` or `?lang=en` keeps the selected language on reload.
+Existing filenames and navigation links stay unchanged. No shared language
+preference overrides the default of another page.
+
 ### Browser checks
 
 These tools are for tests only. The website still needs no build step.
@@ -16,7 +23,8 @@ python -m playwright install chromium
 python -m unittest discover -s tests -v
 ```
 
-The checks cover professional service notices, their scope, mobile layout, and existing navigation.
+The checks cover service notices, HR/EN translation, per-page defaults, mobile layout,
+metadata, product links, contact addresses, privacy terms, and lightbox controls.
 They save screenshots and Chromium V8 JavaScript coverage in `.test-output\`.
 See `AGENTS.md` for the workflow and `docs\GLOSSARY.md` for the components.
 
