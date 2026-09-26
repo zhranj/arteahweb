@@ -473,7 +473,7 @@ class BusinessNoticeTests(unittest.TestCase):
                 expect(main).to_contain_text("No account, name, or email required." if language == "en"
                                            else "Bez korisničkog računa, imena ili e-pošte.")
                 expect(main).to_contain_text("approximate location" if language == "en" else "približnu lokaciju")
-                visit = main.get_by_role("link", name="Visit mojgradsmrdi.hr" if language == "en" else "Otvori mojgradsmrdi.hr", exact=True)
+                visit = main.get_by_role("link", name="Visit mojgradsmrdi.hr" if language == "en" else "Posjetite mojgradsmrdi.hr", exact=True)
                 expect(visit).to_have_attribute("href", "https://mojgradsmrdi.hr/")
                 expect(visit).to_have_attribute("target", "_blank")
                 expect(visit).to_have_attribute("rel", "noopener noreferrer")

@@ -82,7 +82,7 @@ window.siteTranslations = {
         hr: 'Prijavite neugodne mirise u svom gradu i pogledajte prijave na karti. Bez korisničkog računa, imena ili e-pošte.',
         en: 'Report unpleasant smells in your city and view reports on a map. No account, name, or email required.'
     },
-    'moj.visit': { hr: 'Otvori mojgradsmrdi.hr', en: 'Visit mojgradsmrdi.hr' },
+    'moj.visit': { hr: 'Posjetite mojgradsmrdi.hr', en: 'Visit mojgradsmrdi.hr' },
     'moj.location': { hr: 'Prijave koriste približnu lokaciju. ', en: 'Reports use an approximate location. ' },
     'moj.privacy': { hr: 'Pročitajte pravila privatnosti na stranici.', en: 'Read the website privacy policy.' },
     'moj.details': {
