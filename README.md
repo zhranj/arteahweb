@@ -7,11 +7,14 @@ Official website for ARTEAH d.o.o. — architectural consulting and IT services 
 Simply open `index.html` in a browser to preview the site.
 
 The top-menu **HR / EN** button changes the current page language.
-`index.html` defaults to Croatian. `curvekeeper.html`, `curvekeeperMTG.html`,
+`index.html` defaults to Croatian. `curvekeeper.html`, `curvekeeperMTG.html`, `mojgradsmrdi.html`,
 and `curvekeeper-privacy.html` default to English.
 An explicit `?lang=hr` or `?lang=en` keeps the selected language on reload.
 Existing filenames and navigation links stay unchanged. No shared language
 preference overrides the default of another page.
+
+The MojGradSmrdi product page gives a short introduction and links to
+`https://mojgradsmrdi.hr/` for free anonymous odor reporting.
 
 ### Browser checks
 

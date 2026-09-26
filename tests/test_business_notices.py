@@ -109,7 +109,7 @@ class BusinessNoticeTests(unittest.TestCase):
         for section_id in ("o-nama", "products", "kontakt"):
             expect(self.page.locator(f"#{section_id}")).to_have_count(1)
             expect(self.page.locator(f"#{section_id}")).not_to_contain_text("isključivo poslovnim")
-        for filename in ("curvekeeper.html", "curvekeeperMTG.html", "curvekeeper-privacy.html"):
+        for filename in ("curvekeeper.html", "curvekeeperMTG.html", "curvekeeper-privacy.html", "mojgradsmrdi.html"):
             with self.subTest(page=filename):
                 self.collect_coverage()
                 self.page.goto((ROOT / filename).as_uri())
@@ -158,7 +158,7 @@ class BusinessNoticeTests(unittest.TestCase):
             expect(self.page.locator(f"#{section_id} .service-card")).to_have_count(2)
         links = self.page.locator("#products .product-card")
         self.assertEqual(links.evaluate_all("(nodes) => nodes.map(node => node.getAttribute('href'))"),
-                         ["curvekeeper.html", "curvekeeperMTG.html"])
+                         ["curvekeeper.html", "curvekeeperMTG.html", "mojgradsmrdi.html"])
         self.page.set_viewport_size({"width": 375, "height": 1000})
         button = self.page.get_by_role("button", name="Otvori ili zatvori izbornik")
         button.click()
@@ -239,6 +239,7 @@ class BusinessNoticeTests(unittest.TestCase):
             ("curvekeeper.html", "en", "Features", "Značajke"),
             ("curvekeeperMTG.html", "en", "Features", "Značajke"),
             ("curvekeeper-privacy.html", "en", "Privacy Policy", "Pravila privatnosti"),
+            ("mojgradsmrdi.html", "en", "Free and anonymous odor reporting", "Besplatna i anonimna prijava mirisa"),
         ]
         for filename, default, original_heading, translated_heading in pages:
             with self.subTest(page=filename):
@@ -280,7 +281,7 @@ class BusinessNoticeTests(unittest.TestCase):
         expect(self.page.locator("html")).to_have_attribute("lang", "hr")
 
     def test_language_toggle_is_keyboard_accessible_and_fits_mobile(self):
-        for filename in ("index.html", "curvekeeper.html", "curvekeeperMTG.html", "curvekeeper-privacy.html"):
+        for filename in ("index.html", "curvekeeper.html", "curvekeeperMTG.html", "curvekeeper-privacy.html", "mojgradsmrdi.html"):
             for width in (375, 768, 1440):
                 with self.subTest(page=filename, width=width):
                     self.collect_coverage()
@@ -347,7 +348,7 @@ class BusinessNoticeTests(unittest.TestCase):
             expect(self.page.locator(".privacy-content")).to_contain_text(clause)
 
     def test_all_language_bearing_text_and_attributes_are_registered(self):
-        for filename in ("index.html", "curvekeeper.html", "curvekeeperMTG.html", "curvekeeper-privacy.html"):
+        for filename in ("index.html", "curvekeeper.html", "curvekeeperMTG.html", "curvekeeper-privacy.html", "mojgradsmrdi.html"):
             with self.subTest(page=filename):
                 self.collect_coverage()
                 self.page.goto((ROOT / filename).as_uri())
@@ -385,7 +386,7 @@ class BusinessNoticeTests(unittest.TestCase):
                 )
 
     def test_curvekeeper_free_message_is_prominent_and_keeps_release_status(self):
-        for language, label in (("en", "Free"), ("hr", "Besplatno")):
+        for language, label in (("en", "Free app"), ("hr", "Besplatna aplikacija")):
             free_word = re.compile(r"\bfree\b" if language == "en" else r"\bbesplatn", re.I)
             with self.subTest(language=language, page="company"):
                 self.collect_coverage()
@@ -405,7 +406,7 @@ class BusinessNoticeTests(unittest.TestCase):
                         expect(card.locator(".free-badge")).to_be_in_viewport(ratio=1)
                         expect(card.locator(".free-badge")).to_have_css("opacity", "1")
                         expect(card.locator(".free-badge")).to_have_css("text-transform", "uppercase")
-                expect(self.page.locator("#products .free-badge")).to_have_count(2)
+                expect(self.page.locator("#products .free-badge")).to_have_count(3)
                 expect(self.page.locator('#products a[href="curvekeeper.html"] .coming-soon-badge')).to_have_text(
                     "Coming Soon" if language == "en" else "Uskoro"
                 )
@@ -438,6 +439,53 @@ class BusinessNoticeTests(unittest.TestCase):
                             "Coming Soon to iOS App Store" if language == "en" else "Uskoro u trgovini App Store za iOS"
                         )
                         expect(hero.locator('a[href="https://play.google.com/store/apps/details?id=com.curvekeeper.mtg"]')).to_have_count(1)
+
+    def test_mojgradsmrdi_product_directs_visitors_to_free_anonymous_reporting(self):
+        # The card must open our product page, which must direct visitors to the real site.
+        card = self.page.locator('#products a[href="mojgradsmrdi.html"]')
+        expect(card).to_contain_text("Besplatna")
+        expect(card).to_contain_text("anonimna")
+        card.click()
+        expect(self.page).to_have_url((ROOT / "mojgradsmrdi.html").as_uri())
+        expect(self.page.locator("html")).to_have_attribute("lang", "en")
+        for language in ("en", "hr"):
+            with self.subTest(language=language):
+                if language == "hr":
+                    self.page.locator(".language-toggle").click()
+                main = self.page.locator("main")
+                description_words = re.compile(r"free.*anonymous" if language == "en" else r"besplatna.*anonimna", re.I)
+                expect(self.page).to_have_title(description_words)
+                self.assertRegex(self.page.locator('meta[name="description"]').get_attribute("content"), description_words)
+                expect(main.get_by_role("heading", level=1)).to_have_text("MojGradSmrdi.hr")
+                expect(main.locator(".free-badge")).to_have_text(
+                    "Free app" if language == "en" else "Besplatna aplikacija"
+                )
+                expect(main.get_by_role("heading", level=2)).to_have_text(
+                    "Free and anonymous odor reporting" if language == "en" else "Besplatna i anonimna prijava mirisa"
+                )
+                expect(main).to_contain_text("No account, name, or email required." if language == "en"
+                                           else "Bez korisničkog računa, imena ili e-pošte.")
+                expect(main).to_contain_text("approximate location" if language == "en" else "približnu lokaciju")
+                visit = main.get_by_role("link", name="Visit mojgradsmrdi.hr" if language == "en" else "Otvori mojgradsmrdi.hr", exact=True)
+                expect(visit).to_have_attribute("href", "https://mojgradsmrdi.hr/")
+                expect(visit).to_have_attribute("target", "_blank")
+                expect(visit).to_have_attribute("rel", "noopener noreferrer")
+                expect(main.locator('a[href="https://mojgradsmrdi.hr/privacy"]')).to_have_count(1)
+                expect(main).not_to_contain_text(re.compile("no data|bez prikupljanja podataka", re.I))
+                self.assertNotIn("\u2014", self.page.content())
+                expect(main.locator("form, input, textarea")).to_have_count(0)
+                for width in (375, 1440):
+                    self.page.set_viewport_size({"width": width, "height": 1100})
+                    expect(visit).to_be_visible()
+                    expect(visit).to_be_in_viewport(ratio=1)
+                    self.assertTrue(self.page.evaluate("document.documentElement.scrollWidth <= innerWidth"))
+                    self.assertTrue(main.locator("h1").evaluate(
+                        "element => element.getBoundingClientRect().height <= parseFloat(getComputedStyle(element).lineHeight) + 1"
+                    ), "Keep the product name together without an orphaned final letter.")
+                    self.page.screenshot(path=str(OUTPUT / f"mojgradsmrdi-product-{language}-{width}.png"))
+        self.collect_coverage()
+        self.page.goto((ROOT / "index.html").as_uri() + "?lang=en")
+        expect(self.page.locator('#products a[href="mojgradsmrdi.html"]')).to_contain_text("Free and anonymous")
 
     def test_product_descriptions_use_clear_sentences_without_em_dashes(self):
         # Read rendered text so literal characters and HTML entities are both checked.
@@ -507,6 +555,7 @@ class BusinessNoticeTests(unittest.TestCase):
                 ("curvekeeper.html", "en", "Features"),
                 ("curvekeeperMTG.html", "en", "Features"),
                 ("curvekeeper-privacy.html", "en", "Privacy Policy"),
+                ("mojgradsmrdi.html", "en", "Free and anonymous odor reporting"),
             ):
                 with self.subTest(page=filename):
                     page.goto((ROOT / filename).as_uri())
@@ -521,7 +570,7 @@ class BusinessNoticeTests(unittest.TestCase):
         context = self.browser.new_context(java_script_enabled=False)
         try:
             source_page = context.new_page()
-            for filename in ("index.html", "curvekeeper.html", "curvekeeperMTG.html", "curvekeeper-privacy.html"):
+            for filename in ("index.html", "curvekeeper.html", "curvekeeperMTG.html", "curvekeeper-privacy.html", "mojgradsmrdi.html"):
                 with self.subTest(page=filename):
                     source_page.goto((ROOT / filename).as_uri())
                     language = source_page.locator("html").get_attribute("lang")

@@ -387,6 +387,53 @@ html[lang="en"] .language-toggle [lang="en"] {
     object-position: center 10%;
 }
 
+.product-wordmark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    color: var(--color-primary);
+    font-size: 1.35rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.website-product {
+    min-height: 80vh;
+    padding: 150px 0 80px;
+    background: var(--color-bg-alt);
+}
+
+.website-product .container {
+    max-width: 900px;
+}
+
+.website-product h1 {
+    margin-bottom: 1rem;
+    font-size: clamp(1.75rem, 6vw, 4rem);
+    overflow-wrap: anywhere;
+}
+
+.website-product h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+.website-product p {
+    margin-bottom: 1.5rem;
+}
+
+.website-product .product-privacy {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+}
+
+.product-privacy a {
+    text-decoration: underline;
+}
+
 .product-image-layered {
     position: relative;
     display: flex;

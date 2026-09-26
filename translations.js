@@ -7,7 +7,7 @@ window.siteTranslations = {
     'menu.toggle': { hr: 'Otvori ili zatvori izbornik', en: 'Toggle menu' },
     'footer.copyright': { hr: '© 2026 Arteah d.o.o. Sva prava pridržana.', en: '© 2026 Arteah d.o.o. All rights reserved.' },
     'common.comingSoon': { hr: 'Uskoro', en: 'Coming Soon' },
-    'common.free': { hr: 'Besplatno', en: 'Free' },
+    'common.free': { hr: 'Besplatna aplikacija', en: 'Free app' },
     'common.googlePlay': { hr: 'Preuzmite na Google Playu', en: 'Get it on Google Play' },
     'lightbox.close': { hr: 'Zatvori', en: 'Close' },
     'lightbox.previous': { hr: 'Prethodna', en: 'Previous' },
@@ -71,5 +71,18 @@ window.siteTranslations = {
     'home.address': { hr: 'Adresa', en: 'Address' },
     'home.location': { hr: 'Varaždin, Hrvatska', en: 'Varaždin, Croatia' },
     'home.ready': { hr: 'Spremni ste za novi projekt? Javite nam se!', en: 'Ready for a new project? Get in touch!' },
-    'home.email': { hr: 'Pošaljite email', en: 'Send an email' }
+    'home.email': { hr: 'Pošaljite email', en: 'Send an email' },
+    'moj.title': { hr: 'MojGradSmrdi.hr - Besplatna i anonimna prijava mirisa | ARTEAH', en: 'MojGradSmrdi.hr - Free and anonymous odor reporting | ARTEAH' },
+    'moj.summary': {
+        hr: 'Besplatna i anonimna prijava neugodnih mirisa. Pogledajte prijave na karti i pomozite podići svijest o zagađenju zraka.',
+        en: 'Free and anonymous reporting of unpleasant smells. View reports on a map and help raise awareness of air pollution.'
+    },
+    'moj.tagline': { hr: 'Besplatna i anonimna prijava mirisa', en: 'Free and anonymous odor reporting' },
+    'moj.description': {
+        hr: 'Prijavite neugodne mirise u svom gradu i pogledajte prijave na karti. Bez korisničkog računa, imena ili e-pošte.',
+        en: 'Report unpleasant smells in your city and view reports on a map. No account, name, or email required.'
+    },
+    'moj.visit': { hr: 'Otvori mojgradsmrdi.hr', en: 'Visit mojgradsmrdi.hr' },
+    'moj.location': { hr: 'Prijave koriste približnu lokaciju. ', en: 'Reports use an approximate location. ' },
+    'moj.privacy': { hr: 'Pročitajte pravila privatnosti na stranici.', en: 'Read the website privacy policy.' }
 };
