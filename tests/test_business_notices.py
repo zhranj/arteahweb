@@ -384,6 +384,61 @@ class BusinessNoticeTests(unittest.TestCase):
                     original_metadata,
                 )
 
+    def test_curvekeeper_free_message_is_prominent_and_keeps_release_status(self):
+        for language, label in (("en", "Free"), ("hr", "Besplatno")):
+            free_word = re.compile(r"\bfree\b" if language == "en" else r"\bbesplatn", re.I)
+            with self.subTest(language=language, page="company"):
+                self.collect_coverage()
+                self.page.goto((ROOT / "index.html").as_uri() + "?lang=" + language)
+                expect(self.page.locator("#products h2")).to_have_text(
+                    "Free apps" if language == "en" else "Besplatne aplikacije"
+                )
+                for card in self.page.locator("#products .product-card").all():
+                    card.scroll_into_view_if_needed()
+                    expect(self.page.locator("#products")).to_have_css("opacity", "1")
+                    expect(card.locator(".free-badge")).to_have_text(label)
+                    expect(card.locator(".free-badge")).to_be_visible()
+                    expect(card.locator("p")).to_contain_text(free_word)
+                    for width in (375, 1440):
+                        self.page.set_viewport_size({"width": width, "height": 1100})
+                        card.locator(".free-badge").scroll_into_view_if_needed()
+                        expect(card.locator(".free-badge")).to_be_in_viewport(ratio=1)
+                        expect(card.locator(".free-badge")).to_have_css("opacity", "1")
+                        expect(card.locator(".free-badge")).to_have_css("text-transform", "uppercase")
+                expect(self.page.locator("#products .free-badge")).to_have_count(2)
+                expect(self.page.locator('#products a[href="curvekeeper.html"] .coming-soon-badge')).to_have_text(
+                    "Coming Soon" if language == "en" else "Uskoro"
+                )
+                expect(self.page.locator('#products a[href="curvekeeperMTG.html"] img.store-badge')).to_be_visible()
+                expect(self.page.locator("body")).not_to_contain_text(re.compile(r"ad-free|ad free|bez oglasa", re.I))
+            for filename in ("curvekeeper.html", "curvekeeperMTG.html"):
+                with self.subTest(language=language, page=filename):
+                    self.collect_coverage()
+                    self.page.goto((ROOT / filename).as_uri() + "?lang=" + language)
+                    hero = self.page.locator(".CurveKeeper-hero")
+                    badge = hero.locator(".free-badge")
+                    expect(badge).to_have_text(label)
+                    expect(badge).to_be_visible()
+                    expect(badge).to_have_css("font-weight", "700")
+                    expect(hero.locator(".CurveKeeper-tagline")).to_contain_text(free_word)
+                    expect(self.page).to_have_title(free_word)
+                    self.assertRegex(self.page.locator('meta[name="description"]').get_attribute("content"),
+                                     free_word)
+                    expect(self.page.locator("body")).not_to_contain_text(re.compile(r"ad-free|ad free|bez oglasa", re.I))
+                    for width in (375, 1440):
+                        self.page.set_viewport_size({"width": width, "height": 1100})
+                        badge.scroll_into_view_if_needed()
+                        expect(badge).to_be_in_viewport(ratio=1)
+                        expect(badge).to_have_css("opacity", "1")
+                        expect(badge).to_have_css("text-transform", "uppercase")
+                    if filename == "curvekeeper.html":
+                        expect(hero.locator(".coming-soon-badge")).to_have_text("Coming Soon" if language == "en" else "Uskoro")
+                    else:
+                        expect(hero.locator(".coming-soon-badge")).to_have_text(
+                            "Coming Soon to iOS App Store" if language == "en" else "Uskoro u trgovini App Store za iOS"
+                        )
+                        expect(hero.locator('a[href="https://play.google.com/store/apps/details?id=com.curvekeeper.mtg"]')).to_have_count(1)
+
     def test_product_descriptions_use_clear_sentences_without_em_dashes(self):
         # Read rendered text so literal characters and HTML entities are both checked.
         for filename, prefix in (("curvekeeper.html", "runes"), ("curvekeeperMTG.html", "mtg")):

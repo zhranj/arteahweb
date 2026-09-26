@@ -240,16 +240,16 @@ Object.assign(window.siteTranslations, {
         en: "Backup creation screenshot"
     },
     'runes.title': {
-        hr: "CurveKeeper Runes - Pomoćnik za Riftbound TCG | ARTEAH",
-        en: "CurveKeeper Runes - Riftbound TCG Companion | ARTEAH"
+        hr: "CurveKeeper Runes - Besplatni pomoćnik za Riftbound TCG | ARTEAH",
+        en: "CurveKeeper Runes - Free Riftbound TCG Companion | ARTEAH"
     },
     'runes.description': {
-        hr: "CurveKeeper Runes - Mobilna pomoćna aplikacija za igrače Riftbound TCG-a. Skeniranje karata, upravljanje zbirkama, izrada špilova i praćenje igara.",
-        en: "CurveKeeper Runes - Mobile companion app for Riftbound TCG players. Card scanning, collection management, deck building and game tracking."
+        hr: "CurveKeeper Runes - Besplatna mobilna pomoćna aplikacija za igrače Riftbound TCG-a. Skeniranje karata, upravljanje zbirkama, izrada špilova i praćenje igara.",
+        en: "CurveKeeper Runes - Free mobile companion app for Riftbound TCG players. Card scanning, collection management, deck building and game tracking."
     },
     'runes.tagline': {
-        hr: "Vaš neslužbeni pomoćnik za Riftbound TCG",
-        en: "Your Unofficial Riftbound TCG Companion"
+        hr: "Vaš besplatni neslužbeni pomoćnik za Riftbound TCG",
+        en: "Your Free, Unofficial Riftbound TCG Companion"
     },
     'runes.scanning': {
         hr: "Usmjerite kameru prema bilo kojoj karti za Riftbound. Aplikacija je prepoznaje za manje od 2 sekunde i prikazuje pojedinosti o karti s trenutačnom tržišnom cijenom. Dodajte je u svoju zbirku jednim dodirom.",
@@ -320,20 +320,20 @@ Object.assign(window.siteTranslations, {
         en: "Score adjustment controls"
     },
     'mtg.title': {
-        hr: "CurveKeeper MTG - Pomoćnik za Magic: The Gathering | ARTEAH",
-        en: "CurveKeeper MTG - Magic: The Gathering Companion | ARTEAH"
+        hr: "CurveKeeper MTG - Besplatni pomoćnik za Magic: The Gathering | ARTEAH",
+        en: "CurveKeeper MTG - Free Magic: The Gathering Companion | ARTEAH"
     },
     'mtg.description': {
-        hr: "CurveKeeper MTG - Mobilna pomoćna aplikacija za igrače igre Magic: The Gathering. Skeniranje karata, upravljanje zbirkama, izrada špilova i praćenje igara.",
-        en: "CurveKeeper MTG - Mobile companion app for Magic: The Gathering players. Card scanning, collection management, deck building and game tracking."
+        hr: "CurveKeeper MTG - Besplatna mobilna pomoćna aplikacija za igrače igre Magic: The Gathering. Skeniranje karata, upravljanje zbirkama, izrada špilova i praćenje igara.",
+        en: "CurveKeeper MTG - Free mobile companion app for Magic: The Gathering players. Card scanning, collection management, deck building and game tracking."
     },
     'mtg.comingSoon': {
         hr: "Uskoro u trgovini App Store za iOS",
         en: "Coming Soon to iOS App Store"
     },
     'mtg.tagline': {
-        hr: "Vaš pomoćnik za Magic: The Gathering",
-        en: "Your Magic: The Gathering Companion"
+        hr: "Vaš besplatni pomoćnik za Magic: The Gathering",
+        en: "Your Free Magic: The Gathering Companion"
     },
     'mtg.scanning': {
         hr: "Usmjerite kameru prema bilo kojoj karti za Magic. Aplikacija je prepoznaje za manje od 2 sekunde i prikazuje pojedinosti o karti s trenutačnom tržišnom cijenom. Dodajte je u svoju zbirku jednim dodirom.",
