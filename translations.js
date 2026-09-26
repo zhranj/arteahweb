@@ -62,7 +62,6 @@ window.siteTranslations = {
         hr: 'Kontaktirajte nas za jedan sat besplatnog uvodnog savjetovanja za tvrtke. Uz više od deset godina iskustva u području umjetne inteligencije, pomažemo Vam otkriti kako automatizacija i AI mogu unaprijediti Vaše poslovanje.',
         en: 'Contact us for one free hour of introductory consulting for companies. With more than ten years of experience in artificial intelligence, we help you find out how automation and AI can improve your business.'
     },
-    'home.freeApps': { hr: 'Besplatne aplikacije', en: 'Free apps' },
     'home.runes': { hr: 'Besplatna neslužbena aplikacija za skeniranje Riftbound karata, izradu špilova i praćenje igara.', en: 'The free, unofficial Riftbound card scanner, deck builder and game tracker app.' },
     'home.mtg': { hr: 'Besplatna aplikacija za skeniranje Magic: The Gathering karata, izradu špilova i praćenje igara.', en: 'The free Magic: The Gathering card scanner, deck builder and game tracker app.' },
     'home.runesLogo': { hr: 'Logotip CurveKeeper', en: 'CurveKeeper Logo' },

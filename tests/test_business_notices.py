@@ -399,7 +399,7 @@ class BusinessNoticeTests(unittest.TestCase):
                 self.collect_coverage()
                 self.page.goto((ROOT / "index.html").as_uri() + "?lang=" + language)
                 expect(self.page.locator("#products h2")).to_have_text(
-                    "Free apps" if language == "en" else "Besplatne aplikacije"
+                    "Products" if language == "en" else "Proizvodi"
                 )
                 for card in self.page.locator("#products .product-card").all():
                     card.scroll_into_view_if_needed()
