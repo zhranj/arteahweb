@@ -13,8 +13,10 @@ An explicit `?lang=hr` or `?lang=en` keeps the selected language on reload.
 Existing filenames and navigation links stay unchanged. No shared language
 preference overrides the default of another page.
 
-The MojGradSmrdi product page gives a short introduction and links to
-`https://mojgradsmrdi.hr/` for free anonymous odor reporting.
+The MojGradSmrdi product page gives a short introduction, explains its technology,
+and links to `https://mojgradsmrdi.hr/` and its Facebook page.
+It reuses the source project's profile, cover, and social-share images.
+The illustrated map contains fictional reports, not live data.
 
 ### Browser checks
 

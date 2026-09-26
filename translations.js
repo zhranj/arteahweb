@@ -84,5 +84,23 @@ window.siteTranslations = {
     },
     'moj.visit': { hr: 'Otvori mojgradsmrdi.hr', en: 'Visit mojgradsmrdi.hr' },
     'moj.location': { hr: 'Prijave koriste približnu lokaciju. ', en: 'Reports use an approximate location. ' },
-    'moj.privacy': { hr: 'Pročitajte pravila privatnosti na stranici.', en: 'Read the website privacy policy.' }
+    'moj.privacy': { hr: 'Pročitajte pravila privatnosti na stranici.', en: 'Read the website privacy policy.' },
+    'moj.details': {
+        hr: 'Zabilježite vrstu, jačinu i trajanje mirisa ili prijavite da nema neugodnog mirisa. Zajedničke prijave pomažu uočiti probleme koji se ponavljaju.',
+        en: 'Record the smell type, intensity, and duration, or report that there is no unpleasant smell. Together, these reports help communities spot recurring problems.'
+    },
+    'moj.profileAlt': { hr: 'Logotip MojGradSmrdi.hr s oznakom lokacije i linijama mirisa.', en: 'MojGradSmrdi.hr logo with a location pin and smell lines.' },
+    'moj.coverAlt': { hr: 'Promotivna ilustracija karte MojGradSmrdi s izmišljenim prijavama.', en: 'MojGradSmrdi promotional map illustration with fictional reports.' },
+    'moj.coverCaption': { hr: 'Promotivna ilustracija. Prikazane prijave su izmišljene, a ne podaci uživo.', en: 'Promotional illustration. The reports shown are fictional, not live data.' },
+    'moj.shareAlt': { hr: 'Promotivna ilustracija Varaždina s izmišljenim prijavama mirisa i legendom. Ne prikazuje stvarne prijave.', en: 'Promotional illustration of Varaždin with fictional odor reports and a legend. It does not show real reports.' },
+    'moj.facebook': { hr: 'Pratite na Facebooku', en: 'Follow on Facebook' },
+    'moj.technologyTitle': { hr: 'Kako radi', en: 'How it works' },
+    'moj.stackTitle': { hr: 'Web aplikacija', en: 'Web app' },
+    'moj.stack': { hr: 'Next.js, React i TypeScript pokreću sučelje u pregledniku. Nije potrebna instalacija aplikacije.', en: 'Next.js, React, and TypeScript power the browser interface. No app installation is needed.' },
+    'moj.mapTitle': { hr: 'Karta i podaci', en: 'Map and data' },
+    'moj.map': { hr: 'Leaflet i OpenStreetMap prikazuju kartu. PostgreSQL čuva prijave za pregled prema mjestu i vremenu.', en: 'Leaflet and OpenStreetMap provide the map. PostgreSQL stores reports for viewing by place and time.' },
+    'moj.privacyTitle': { hr: 'Zaštita lokacije', en: 'Location privacy' },
+    'moj.privacyTechnique': { hr: 'Lokacije prijava nasumično se pomiču prije pohrane. Prijava ne zahtijeva korisnički račun, ime ni e-poštu.', en: 'Report locations are randomly shifted before storage. Reporting does not require an account, name, or email.' },
+    'moj.qualityTitle': { hr: 'Kontekst i kvaliteta prijava', en: 'Context and report quality' },
+    'moj.quality': { hr: 'Open-Meteo dodaje podatke o vjetru i vremenu. Poslužiteljske provjere lokacije i ograničenja prijava pomažu smanjiti lažne i ponovljene prijave.', en: 'Open-Meteo adds wind and weather data. Server-side location checks and report limits help reduce false and repeated reports.' }
 };

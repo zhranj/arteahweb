@@ -387,17 +387,6 @@ html[lang="en"] .language-toggle [lang="en"] {
     object-position: center 10%;
 }
 
-.product-wordmark {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    color: var(--color-primary);
-    font-size: 1.35rem;
-    font-weight: 700;
-    overflow-wrap: anywhere;
-}
-
 .website-product {
     min-height: 80vh;
     padding: 150px 0 80px;
@@ -432,6 +421,54 @@ html[lang="en"] .language-toggle [lang="en"] {
 
 .product-privacy a {
     text-decoration: underline;
+}
+
+.product-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+    align-items: center;
+}
+
+.product-social {
+    color: var(--color-primary);
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.product-cover {
+    margin: 2rem 0;
+}
+
+.product-cover img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.product-cover figcaption {
+    margin-top: 0.5rem;
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+}
+
+.product-technology ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 24px;
+    list-style: none;
+}
+
+.product-technology li {
+    padding: 24px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+}
+
+.product-technology p {
+    margin-bottom: 0;
 }
 
 .product-image-layered {

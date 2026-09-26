@@ -2,6 +2,7 @@ import json
 import re
 import unittest
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from playwright.sync_api import expect, sync_playwright
 
@@ -375,6 +376,12 @@ class BusinessNoticeTests(unittest.TestCase):
                     }
                     const description = document.querySelector('meta[name="description"]');
                     if (!description?.hasAttribute('data-i18n-content')) missing.push('meta description');
+                    for (const element of document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]')) {
+                        const name = element.getAttribute('property') || element.getAttribute('name');
+                        if (/(title|description|alt)$/.test(name) && !element.hasAttribute('data-i18n-content')) {
+                            missing.push(name);
+                        }
+                    }
                     return missing;
                 }""")
                 self.assertEqual(missing, [], "Unregistered text could remain in the wrong language.")
@@ -460,7 +467,7 @@ class BusinessNoticeTests(unittest.TestCase):
                 expect(main.locator(".free-badge")).to_have_text(
                     "Free app" if language == "en" else "Besplatna aplikacija"
                 )
-                expect(main.get_by_role("heading", level=2)).to_have_text(
+                expect(main.locator('h2[data-i18n="moj.tagline"]')).to_have_text(
                     "Free and anonymous odor reporting" if language == "en" else "Besplatna i anonimna prijava mirisa"
                 )
                 expect(main).to_contain_text("No account, name, or email required." if language == "en"
@@ -486,6 +493,77 @@ class BusinessNoticeTests(unittest.TestCase):
         self.collect_coverage()
         self.page.goto((ROOT / "index.html").as_uri() + "?lang=en")
         expect(self.page.locator('#products a[href="mojgradsmrdi.html"]')).to_contain_text("Free and anonymous")
+
+    def test_mojgradsmrdi_explains_technology_and_links_facebook(self):
+        for language in ("en", "hr"):
+            with self.subTest(language=language):
+                self.collect_coverage()
+                self.page.goto((ROOT / "mojgradsmrdi.html").as_uri() + "?lang=" + language)
+                technology = self.page.locator(".product-technology")
+                expect(technology.get_by_role("heading", name="How it works" if language == "en" else "Kako radi", exact=True)).to_have_count(1)
+                expect(technology.locator("li")).to_have_count(4)
+                for name in ("Next.js", "React", "TypeScript", "Leaflet", "OpenStreetMap", "PostgreSQL", "Open-Meteo"):
+                    expect(technology).to_contain_text(name)
+                expect(technology).to_contain_text("shifted before storage" if language == "en" else "pomiču prije pohrane")
+                expect(technology).to_contain_text("report limits" if language == "en" else "ograničenja prijava")
+                facebook = self.page.get_by_role("link", name="Follow on Facebook" if language == "en" else "Pratite na Facebooku", exact=True)
+                expect(facebook).to_have_attribute("href", "https://www.facebook.com/profile.php?id=61594654555021")
+                expect(facebook).to_have_attribute("target", "_blank")
+                expect(facebook).to_have_attribute("rel", "noopener noreferrer")
+                expect(facebook).to_be_visible()
+
+    def test_mojgradsmrdi_reuses_brand_assets_and_share_metadata(self):
+        image_root = "img/mojgradsmrdi/"
+        profile_path = image_root + "mojgradsmrdi-facebook-profile.png"
+        cover_path = image_root + "mojgradsmrdi-facebook-cover.png"
+        origin = "https://" + (ROOT / "CNAME").read_text(encoding="utf-8").strip()
+        share_url = origin + "/img/mojgradsmrdi/varazdin-map-v4.png"
+        card_image = self.page.locator('#products a[href="mojgradsmrdi.html"] img')
+        expect(card_image).to_have_attribute("src", profile_path)
+        expect(card_image).to_have_attribute("width", "1024")
+        expect(card_image).to_have_attribute("height", "1024")
+        self.assertEqual(card_image.evaluate("image => [image.naturalWidth, image.naturalHeight]"), [1024, 1024])
+        self.collect_coverage()
+        self.page.goto((ROOT / "mojgradsmrdi.html").as_uri())
+        for language in ("en", "hr"):
+            with self.subTest(language=language):
+                if language == "hr":
+                    self.page.locator(".language-toggle").click()
+                cover = self.page.locator(".product-cover img")
+                expect(cover).to_have_attribute("src", cover_path)
+                expect(cover).to_have_attribute("width", "1640")
+                expect(cover).to_have_attribute("height", "720")
+                self.assertEqual(cover.evaluate("image => [image.naturalWidth, image.naturalHeight]"), [1640, 720])
+                expect(cover).to_have_attribute("alt", "MojGradSmrdi promotional map illustration with fictional reports."
+                                               if language == "en" else "Promotivna ilustracija karte MojGradSmrdi s izmišljenim prijavama.")
+                caption = "Promotional illustration. The reports shown are fictional, not live data." if language == "en" else "Promotivna ilustracija. Prikazane prijave su izmišljene, a ne podaci uživo."
+                expect(self.page.locator(".product-cover figcaption")).to_have_text(caption)
+                for word in (("type", "intensity", "duration", "no unpleasant smell") if language == "en"
+                             else ("vrstu", "jačinu", "trajanje", "nema neugodnog mirisa")):
+                    expect(self.page.locator('[data-i18n="moj.details"]')).to_contain_text(word)
+                expect(self.page.locator('meta[property="og:image"]')).to_have_attribute("content", share_url)
+                expect(self.page.locator('meta[property="og:url"]')).to_have_attribute("content", origin + "/mojgradsmrdi.html")
+                expect(self.page.locator('meta[name="twitter:image"]')).to_have_attribute("content", share_url)
+                expect(self.page.locator('meta[property="og:image:width"]')).to_have_attribute("content", "1200")
+                expect(self.page.locator('meta[property="og:image:height"]')).to_have_attribute("content", "630")
+                expect(self.page.locator('meta[name="twitter:card"]')).to_have_attribute("content", "summary_large_image")
+                title = "MojGradSmrdi.hr - Free and anonymous odor reporting | ARTEAH" if language == "en" else "MojGradSmrdi.hr - Besplatna i anonimna prijava mirisa | ARTEAH"
+                for selector in ('meta[property="og:title"]', 'meta[name="twitter:title"]'):
+                    expect(self.page.locator(selector)).to_have_attribute("content", title)
+                for selector in ('meta[property="og:image:alt"]', 'meta[name="twitter:image:alt"]'):
+                    expect(self.page.locator(selector)).to_have_attribute("content", re.compile("fictional" if language == "en" else "izmišljen"))
+                for width in (375, 1440):
+                    self.page.set_viewport_size({"width": width, "height": 1100})
+                    cover.scroll_into_view_if_needed()
+                    expect(cover).to_be_visible()
+                    bounds = cover.bounding_box()
+                    self.assertAlmostEqual(bounds["width"] / bounds["height"], 1640 / 720, delta=0.01)
+                    self.assertTrue(self.page.evaluate("document.documentElement.scrollWidth <= innerWidth"))
+        actual_share_url = self.page.locator('meta[property="og:image"]').get_attribute("content")
+        share_file = ROOT.joinpath(*urlsplit(actual_share_url).path.lstrip("/").split("/"))
+        data = share_file.read_bytes()
+        self.assertEqual(data[:8], b"\x89PNG\r\n\x1a\n")
+        self.assertEqual((int.from_bytes(data[16:20], "big"), int.from_bytes(data[20:24], "big")), (1200, 630))
 
     def test_product_descriptions_use_clear_sentences_without_em_dashes(self):
         # Read rendered text so literal characters and HTML entities are both checked.
