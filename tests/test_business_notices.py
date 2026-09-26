@@ -104,6 +104,11 @@ class BusinessNoticeTests(unittest.TestCase):
                 self.page.goto((ROOT / filename).as_uri())
                 expect(self.page.locator("body")).not_to_contain_text("isključivo poslovnim")
                 expect(self.page.locator("body")).not_to_contain_text(QUOTATION)
+                if filename == "curvekeeper-privacy.html":
+                    app_contacts = self.page.get_by_role("link", name="curvekeeper@arteah.hr", exact=True)
+                    expect(app_contacts).to_have_count(2)
+                    for app_contact in app_contacts.all():
+                        expect(app_contact).to_have_attribute("href", "mailto:curvekeeper@arteah.hr")
 
     def test_ac4_notices_are_visible_on_mobile_and_desktop(self):
         for width in (375, 1440):
@@ -152,33 +157,54 @@ class BusinessNoticeTests(unittest.TestCase):
         expect(self.page).to_have_url((ROOT / "index.html").as_uri() + "#it")
         expect(self.page.locator("#it")).to_have_css("opacity", "1")
 
-    def test_it_consulting_offers_companies_one_free_hour_with_ai_experience(self):
-        # Keep the free discovery offer in consulting, not in the app or architecture offers.
-        paragraphs = [
-            "Savjetovanje i tehnička podrška za digitalizaciju Vašeg poslovanja.",
-            "Tvrtkama nudimo jedan sat besplatnog uvodnog savjetovanja za istraživanje "
-            "mogućnosti razvoja poslovanja, s posebnim naglaskom na primjenu umjetne "
-            "inteligencije (AI).",
-            "Imamo više od deset godina iskustva u području umjetne inteligencije.",
-        ]
-        card = self.page.locator("#it .service-card").filter(
-            has=self.page.get_by_role("heading", name="IT konzalting", exact=True)
+    def test_company_contact_uses_the_general_inbox(self):
+        # The displayed address and email action must agree.
+        contact = self.page.locator("#kontakt")
+        expect(contact.locator(".contact-info")).to_contain_text("kontakt@arteah.hr")
+        expect(contact.get_by_role("link", name="Pošaljite email", exact=True)).to_have_attribute(
+            "href", "mailto:kontakt@arteah.hr"
         )
-        expect(card).to_have_count(1)
-        expect(card.locator("p")).to_have_text(paragraphs)
-        for text in paragraphs[1:]:
-            expect(self.page.get_by_text(text, exact=True)).to_have_count(1)
-        for width in (375, 1440):
-            with self.subTest(width=width):
-                self.page.set_viewport_size({"width": width, "height": 1000})
-                card.scroll_into_view_if_needed()
-                expect(self.page.locator("#it")).to_have_css("opacity", "1")
-                card.evaluate("""card => window.scrollTo({
-                    top: card.getBoundingClientRect().top + window.scrollY - 100,
-                    behavior: 'instant'
-                })""")
-                expect(card).to_be_in_viewport(ratio=1)
-                for paragraph in card.locator("p").all():
+        expect(self.page.locator("body")).not_to_contain_text("tea@arteah.hr")
+        expect(self.page.locator('a[href="mailto:tea@arteah.hr"]')).to_have_count(0)
+
+    def test_it_service_copy_is_short_scoped_and_visible(self):
+        # Pin the approved benefits and free offer without adding promotional headlines.
+        expect(self.page.locator("#it").get_by_role("heading")).to_have_text(
+            ["IT usluge", "Razvoj aplikacija", "IT konzalting"]
+        )
+        descriptions = {
+            "Razvoj aplikacija": (
+                "development",
+                "Razvijamo web, mobilne i desktop aplikacije prilagođene Vašem načinu rada. "
+                "Automatizirajte zadatke, povežite podatke i olakšajte rad svojem timu i kupcima.",
+            ),
+            "IT konzalting": (
+                "consulting",
+                "Kontaktirajte nas za jedan sat besplatnog uvodnog savjetovanja za tvrtke. "
+                "Uz više od deset godina iskustva u području umjetne inteligencije, "
+                "pomažemo Vam otkriti kako automatizacija i AI mogu unaprijediti Vaše poslovanje.",
+            ),
+        }
+        for title, (slug, text) in descriptions.items():
+            with self.subTest(card=title):
+                card = self.page.locator("#it .service-card").filter(
+                    has=self.page.get_by_role("heading", name=title, exact=True)
+                )
+                expect(card).to_have_count(1)
+                expect(card.locator(".service-icon svg")).to_have_count(1)
+                expect(card.locator("p")).to_have_text([text])
+                expect(card).to_have_text(f"{title} {text}")
+                expect(self.page.get_by_text(text, exact=True)).to_have_count(1)
+                for width in (375, 1440):
+                    self.page.set_viewport_size({"width": width, "height": 1000})
+                    card.scroll_into_view_if_needed()
+                    expect(self.page.locator("#it")).to_have_css("opacity", "1")
+                    card.evaluate("""card => window.scrollTo({
+                        top: card.getBoundingClientRect().top + window.scrollY - 100,
+                        behavior: 'instant'
+                    })""")
+                    expect(card).to_be_in_viewport(ratio=1)
+                    paragraph = card.locator("p")
                     expect(paragraph).to_be_visible()
                     expect(paragraph).to_be_in_viewport(ratio=1)
                     self.assertTrue(paragraph.evaluate("""element => {
@@ -188,13 +214,13 @@ class BusinessNoticeTests(unittest.TestCase):
                         return getComputedStyle(element).color !== 'rgba(0, 0, 0, 0)'
                             && element.scrollWidth <= element.clientWidth
                             && element.scrollHeight <= element.clientHeight;
-                    }"""), "The consulting text must not be transparent or clipped.")
-                self.assertTrue(self.page.evaluate(
-                    "() => document.documentElement.scrollWidth <= window.innerWidth"
-                ), f"The consulting card overflows at {width}px.")
-                self.page.screenshot(
-                    path=str(OUTPUT / f"it-consulting-{width}.png"), animations="disabled"
-                )
+                    }"""), f"The {title} text must not be transparent or clipped at {width}px.")
+                    self.assertTrue(self.page.evaluate(
+                        "() => document.documentElement.scrollWidth <= window.innerWidth"
+                    ), f"The {title} card overflows at {width}px.")
+                    self.page.screenshot(
+                        path=str(OUTPUT / f"it-{slug}-{width}.png"), animations="disabled"
+                    )
 
 
 if __name__ == "__main__":
